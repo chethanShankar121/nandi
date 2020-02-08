@@ -1,0 +1,45 @@
+.wrapper{
+    height: 100%;
+    overflow: auto;
+}
+.section-container{
+    height:100vh;
+}
+.property-details-container{
+    background-color: yellowgreen;
+}
+.property-location-container{
+    background-color: teal;
+}
+.property-feature-container{
+    background-color: violet;
+}
+.scroll-menu{
+    position: fixed;
+    top:5em;
+    right:8px;
+    border-right: solid #e0e0e0 1px;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+.scroll-menu-items{
+    transform: translateX(75%);
+    transition: 0.3s ease-in-out;
+    padding: 0.6em;
+    background-color: #fcfcfc;
+    border:solid #e0e0e0 1px;
+    border-radius: 4px;
+    align-items: center;
+}
+.scroll-menu-items:hover{
+    transform: translateX(0%);
+    cursor: pointer;
+    background: #bcbc;
+}
+.scroll-button-icon{
+    height: 2em;
+    margin: 0.3em 1em 0 0;
+}
+.type-menu-items{
+
+}

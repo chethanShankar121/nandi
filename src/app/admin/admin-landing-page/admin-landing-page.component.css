@@ -1,0 +1,40 @@
+.wrapper{
+    height: 100%;
+    background: url('../../../assets/background-images/admin-welcome.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.welcome-container{
+    justify-content: center;
+    align-items: center;
+    padding-top:12em;
+
+}
+.container-head{
+    color:#fff;
+    font-size: 3em;
+}
+.menu-container{
+    color:#fff;
+}
+.menu-item{
+    transition: 0.3s ease-in-out;
+    padding:1em 2em;
+    background:rgba(150,150,150,0.5);
+    margin-top:1em;
+    border: solid #c7c7c7 1px;
+    border-radius: 4px;
+}
+.menu-item:hover{
+    transform: translateY(-2px);
+    box-shadow: 0px 0px 6px 2px #828282;
+    cursor: pointer;
+}
+
+.arrow-link{
+    transition: 0.3s ease-in-out;
+    height: 20px;
+    padding-left: 2em;
+}

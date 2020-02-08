@@ -1,0 +1,11 @@
+<div class="wrapper">
+    <div class="welcome-container flex flex-col">
+        <h1 class="container-head">What shall we do now ?</h1>
+        <div class="menu-container flex flex-col">
+            <div class="menu-item flex flex-between" *ngFor="let item of menuItems" (click)="navigateTo(item.link)">
+                <div>{{item.name}}</div>
+                <div><img class="arrow-link" src="../../../assets/icons/right-arrow.png"></div>
+            </div>
+        </div>
+    </div>
+</div>

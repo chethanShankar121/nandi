@@ -1,0 +1,35 @@
+<div class="wrapper">
+    <div class="scroll-menu">
+        <div *ngFor="let item of scrollMenuItems" class="scroll-menu-items flex center-align">
+            <div><img class="scroll-button-icon" src="../../assets/icons/{{item.id}}.svg" ></div>
+            <div (click)="scrollToView(item.id, $event)">{{item.name}}</div>
+        </div>
+    </div>
+    <div class="section-container" id="property-details">
+        <h2>Property Details</h2>
+        <div class="purpose-container">
+            <div>
+                <mat-form-field>
+                    <mat-label>Property For</mat-label>
+                    <mat-select [(ngModel)]="selectedValue" name="opt">
+                      <mat-option *ngFor="let opt of purposeOptions" [value]="opt.value">
+                        {{opt.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+        </div>
+        <div class="type-container">
+            <div>Property Type:</div>
+            <div class="type-widget">
+                <div class="type-menu flex">
+                    <app-property-type-select></app-property-type-select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section-container" id="property-location"></div>
+    <div class="section-container" id="property-features"></div>
+    <div class="section-container" id="property-description"></div>
+    <div class="section-container" id="property-photos"></div>
+</div>

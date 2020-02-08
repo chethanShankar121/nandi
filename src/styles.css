@@ -1,0 +1,314 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: roboto-extraLight;
+    src: url(/assets/fonts/roboto/Roboto-Thin.ttf);
+}
+@font-face {
+    font-family: roboto-extraLight-italic;
+    src: url(/assets/fonts/roboto/Roboto-ThinItalic.ttf);
+}
+@font-face {
+    font-family: roboto-light;
+    src: url(/assets/fonts/roboto/Roboto-Light.ttf);
+}
+@font-face {
+    font-family: roboto-light-italic;
+    src: url(/assets/fonts/roboto/Roboto-LightItalic.ttf);
+}
+@font-face {
+    font-family: roboto-regular;
+    src: url(/assets/fonts/roboto/Roboto-Regular.ttf);
+}
+@font-face {
+    font-family: roboto-medium;
+    src: url(/assets/fonts/roboto/Roboto-Medium.ttf);
+}
+@font-face {
+    font-family: roboto-medium-italic;
+    src: url(/assets/fonts/roboto/Roboto-MediumItalic.ttf);
+}
+@font-face {
+    font-family: roboto-bold;
+    src: url(/assets/fonts/roboto/Roboto-Bold.ttf);
+}
+@font-face {
+    font-family: roboto-bold-italic;
+    src: url(/assets/fonts/roboto/Roboto-BoldItalic.ttf);
+}
+@font-face {
+    font-family: roboto-extraBold;
+    src: url(/assets/fonts/roboto/Roboto-Black.ttf);
+}
+@font-face {
+    font-family: roboto-extraBold-italic;
+    src: url(/assets/fonts/roboto/Roboto-BlackItalic.ttf);
+}
+
+/***********************************************************
+                poppins
+***********************************************************/
+@font-face {
+    font-family: poppins-extraLight;
+    src: url(/assets/fonts/poppins/Poppins-Thin.otf);
+}
+@font-face {
+    font-family: poppins-extraLight-italic;
+    src: url(/assets/fonts/poppins/Poppins-ThinItalic.otf);
+}
+@font-face {
+    font-family: poppins-light;
+    src: url(/assets/fonts/poppins/Poppins-Light.otf);
+}
+@font-face {
+    font-family: poppins-light-italic;
+    src: url(/assets/fonts/poppins/Poppins-LightItalic.otf);
+}
+@font-face {
+    font-family: poppins-regular;
+    src: url(/assets/fonts/poppins/Poppins-Regular.otf);
+}
+@font-face {
+    font-family: poppins-medium;
+    src: url(/assets/fonts/poppins/Poppins-Medium.otf);
+}
+@font-face {
+    font-family: poppins-medium-italic;
+    src: url(/assets/fonts/poppins/Poppins-MediumItalic.otf);
+}
+@font-face {
+    font-family: poppins-bold;
+    src: url(/assets/fonts/poppins/Poppins-Bold.otf);
+}
+@font-face {
+    font-family: poppins-bold-italic;
+    src: url(/assets/fonts/poppins/Poppins-BoldItalic.otf);
+}
+@font-face {
+    font-family: poppins-extraBold;
+    src: url(/assets/fonts/poppins/Poppins-Black.otf);
+}
+@font-face {
+    font-family: poppins-extraBold-italic;
+    src: url(/assets/fonts/poppins/Poppins-BlackItalic.otf);
+}
+
+* {
+    box-sizing: border-box;
+    letter-spacing: 0.1px;
+    padding:0;
+    margin:0;
+}
+
+body {
+    overflow-x: hidden;
+    margin:0;
+    padding: 0;
+    font-family: poppins-light;
+}
+::-webkit-scrollbar {
+    max-width: 7px;
+    background-color: transparent;
+    max-height: 7px;
+    transition: 0.28s ease;
+}
+
+::-webkit-scrollbar-button {
+    background-color: transparent;
+    display: none;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 7px;
+    background-color: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-corner {
+    display: none;
+    background-color: transparent;
+}
+
+::-webkit-resizer {
+    display: none;
+    background-color: transparent;
+}
+
+/* Utility classes */
+
+.relative {
+    position: relative;
+}
+
+.ilb {
+    display: inline-block;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.fixed {
+    position: fixed;
+}
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+.hide {
+    display: none!important;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.nowrap-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.no-shrink {
+    flex-shrink: 0;
+}
+
+.flex-grow {
+    flex-grow: 1;
+}
+
+.flex {
+    display: table-cell;
+    display: flex;
+}
+
+.inline {
+    display: inline;
+}
+
+.inline-flex {
+    display: inline-flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-col-reverse {
+    flex-direction: column-reverse;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.flex-around {
+    justify-content: space-around;
+}
+
+.flex-evenly {
+    justify-content: space-evenly;
+}
+
+.flex-between {
+    justify-content: space-between;
+}
+
+.flex-start {
+    justify-content: flex-start;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
+.flex-center {
+    justify-content: center;
+}
+
+.flex-align-center {
+    align-items: center;
+}
+
+.flex-align-start {
+    align-items: flex-start;
+}
+
+.flex-align-stretch {
+    align-items: stretch;
+}
+
+.flex-align-end {
+    align-items: flex-end;
+}
+
+.flex-align-baseline {
+    align-items: baseline;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-flow-wrap {
+    flex-flow: wrap;
+}
+
+.no-event {
+    pointer-events: none;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.italics {
+    font-style: italic;
+}
+
+.v-mid {
+    vertical-align: middle;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.full-height {
+    height: 100%;
+}
+
+
+/*******************************************************
+            Global styles
+******************************************************/
+html, body { height: 100%; }
+html {
+    font-size: 12px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+html body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
