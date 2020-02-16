@@ -1,17 +1,27 @@
 package com.nldc.build.model;
 
-public class Admin {
+public class User {
 	
 	private int id;
 	private String userName;
 	private String password;
 	private String name;
+	private int accessRole;
 	
-	public Admin(int id, String userName, String password, String name) {
+	public int getAccessRole() {
+		return accessRole;
+	}
+
+	public void setAccessRole(int accessRole) {
+		this.accessRole = accessRole;
+	}
+
+	public User(int id, String userName, String password, String name, int accessRole) {
 		this.setId(id);
 		this.setUserName(userName);
 		this.setPassword(password);
 		this.setName(name);
+		this.setAccessRole(accessRole);
 	}
 	
 	public int getId() {

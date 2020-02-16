@@ -5,19 +5,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
-import com.nldc.build.model.Admin;
+import com.nldc.build.model.User;
 import com.nldc.build.model.AuthModel;
-import com.nldc.build.service.AdminService;
+import com.nldc.build.service.LoginService;
 
 @RestController
-public class AdminController {
+public class LoginController {
 	
 	@Autowired
-	AdminService adminService;
+	LoginService loginService;
 	
-	@PostMapping(value="/adminLogin", consumes = "application/json", produces = "application/json")
-	public AuthModel authAdmin(@RequestBody Admin admin ) {
-		return adminService.authoriseAdmin(admin);
+	@PostMapping(value="/login", consumes = "application/json", produces = "application/json")
+	public AuthModel authAll(@RequestBody User user ) {
+		return loginService.authoriseUser(user);
 	}
 
 }
