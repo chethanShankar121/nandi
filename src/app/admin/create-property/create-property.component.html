@@ -1,7 +1,7 @@
 <div class="wrapper">
     <div class="scroll-menu">
         <div *ngFor="let item of scrollMenuItems" class="scroll-menu-items flex center-align" (click)="scrollToView(item.id, $event)">
-            <div><img class="scroll-button-icon" src="../../assets/icons/{{item.id}}.svg" ></div>
+            <div><img class="scroll-button-icon" src="../../assets/icons/{{item.id}}.svg"></div>
             <div>{{item.name}}</div>
         </div>
     </div>
@@ -17,7 +17,7 @@
                       </mat-option>
                     </mat-select>
                   </mat-form-field> -->
-                  <app-drop-down></app-drop-down>
+                <app-drop-down [dropdownLabel]="'Property For'" [dropdownList]="purposeOptions"></app-drop-down>
             </div>
         </div>
         <div class="type-container">

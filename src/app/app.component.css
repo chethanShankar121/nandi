@@ -10,6 +10,7 @@
     left:0;
     right:0;
     width:100%;
+    z-index: 50;
 }
 .body{
     width:100%;
@@ -17,4 +18,20 @@
     overflow: hidden;
     height: calc(100% - 50px);
 
+}
+app-contextual-menu{
+    z-index: 31;
+    height: calc(100vh - 50px);
+    background-color: #fff;
+    max-width: 22em;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    min-width: 18em;
+    transform: translateX(-100%);
+    transition: transform 0.4s;
+}
+
+.show-menu{
+    transform: translateX(0%);
 }

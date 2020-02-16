@@ -1,5 +1,8 @@
 <div class="header-wrap">
     <div class="menu-container flex flex-between">
+        <div>
+            <img src="assets/icons/menu-icon.svg" (click)="toggleContextualMenu()" alt="">
+        </div>
         <div class="logo-container">NLDC</div>
         <div class="item-list">
             <div class="nav-item" *ngFor="let item of headerItems">

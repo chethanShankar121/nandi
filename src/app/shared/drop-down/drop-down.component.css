@@ -1,8 +1,8 @@
 .filter-dropdown-wrap{
     box-shadow: 0 0 1px 1px #9c9c9c;
-    width: 100%;
     justify-content: space-between;
     border-radius: 5px;
+    max-width: 20em;
 }
 .filter-button{
     padding: 0.73em;
@@ -18,10 +18,8 @@
     padding-bottom: 2px;
 }
 .dropdown-icon{
-    position: absolute;
-    right: 0.5em;
-    top: 50%;
-    transform: translateY(-50%);
+    height: 1em;
+    width: 1em;
 }
 .filter-text{
     padding: 0 5px 2px 3px;

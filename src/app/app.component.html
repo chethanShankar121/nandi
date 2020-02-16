@@ -1,8 +1,10 @@
 <div class="wrapper">
     <div class="header-container">
-        <app-header></app-header>
+        <app-header (contextualMenuToggler)="toggleContextualMenu($event)"></app-header>
     </div>
     <div class="body">
+        <app-contextual-menu [ngClass]="showContextualMenu === true ? 'show-menu':''" (closeMenu)="toggleContextualMenu(false)"></app-contextual-menu>
+        <app-overlay *ngIf="showContextualMenu" (click)="toggleContextualMenu(false)"></app-overlay>
         <router-outlet></router-outlet>
     </div>
 </div>

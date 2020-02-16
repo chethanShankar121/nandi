@@ -1,0 +1,16 @@
+<div class="menu-wrapper">
+    <div class="menu">
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let item of contextualMenuList" [hideToggle]="item.dashboards && item.dashboards.length ? 'false':'true'">
+                <mat-expansion-panel-header expandedHeight="42px" collapsedHeight="42px" [routerLink]="!item.dashboards ? [item.route]:[]" routerLinkActive='' (click)="onSelect(item)">
+                    {{item.name}}
+                </mat-expansion-panel-header>
+                <div *ngIf="item.dashboards" class="sub-list-container">
+                    <div *ngFor="let list of item.dashboards" class="list-item" routerLink="{{list.route}}" (click)="onSelect(list)">
+                        {{list.name}}
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {MatSelectModule} from '@angular/material/select';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 
 @Component({
   selector: 'app-create-property',
@@ -11,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 export class CreatePropertyComponent implements OnInit {
 
   propertyForSelected;
-  scrollMenuItems =[
+  scrollMenuItems = [
     {
       name: 'Property Details',
       id: 'property-details'
@@ -35,31 +32,30 @@ export class CreatePropertyComponent implements OnInit {
   ];
   purposeOptions = [
     {
-      value: 'sell',
-      viewValue: 'Sell',
+      name: 'Sell',
+      key: 'sell'
     },
     {
-      value: 'rent',
-      viewValue: 'Rent',
+      name: 'rent',
+      key: 'Rent',
     },
     {
-      value: 'lease',
-      viewValue: 'Lease',
+      name: 'lease',
+      key: 'Lease',
     }
   ];
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { }
+  scrollToView(menu, e) {
+    console.log(menu);
+    console.log(e.target);
+    let el = document.getElementById(menu);
+    console.log(el);
+    el.scrollIntoView({ behavior: 'smooth' });
   }
-scrollToView(menu, e) {
-  console.log(menu);
-  console.log(e.target);
-  let el = document.getElementById(menu);
-  console.log(el);
-  el.scrollIntoView({ behavior: 'smooth' });
-}
-typeSelection(type) {
-console.log(type);
-}
+  typeSelection(type) {
+    console.log(type);
+  }
 }

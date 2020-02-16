@@ -14,25 +14,25 @@ export const AllRoutes = [
     },
     {
         path: 'admin',
-        component: AdminLandingPageComponent,
         pathMatch: 'prefix',
-        // children: [
-        //     {
-        //         path: '',
-        //         redirectTo: '/admin',
-        //         pathMatch: 'full'
-        //     },
-        //     {
-        //         path: 'create-property',
-        //         component: CreatePropertyComponent
-        //     }
-        // ]
+        children: [
+            {
+                path: '',
+                component: AdminLandingPageComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: 'create-property',
+                component: CreatePropertyComponent,
+                pathMatch: 'full'
+            }
+        ]
     },
-    {
-        path: 'admin/create-property',
-        component: CreatePropertyComponent,
-        pathMatch: 'full'
-    },
+    // {
+    //     path: 'admin/create-property',
+    //     component: CreatePropertyComponent,
+    //     pathMatch: 'full'
+    // },
     { 
         path:"**", 
         redirectTo: '/home',

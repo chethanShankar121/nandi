@@ -1,18 +1,18 @@
 <div class="filter-dropdown-wrap relative" tabindex="1" (blur)="showDropDown = false">
     <div class="flex relative filter-button" (click)="toggleDropdown()">
-      <div class="dropdown-indicator">View By:</div>
-      <div class="filter-text">{{selectedItem.name}}</div>
-      <img class="dropdown-icon" src="assets/icons/down-arrow-black.svg">
+        <div class="dropdown-indicator">{{dropdownLabel}}:</div>
+        <div class="filter-text">{{selectedItem?.name}}</div>
+        <img class="dropdown-icon" src="assets/icons/drop-down-black.svg">
     </div>
     <div class="filter-dropdown absolute" *ngIf="showDropDown">
-      <ng-container *ngFor="let item of processedArray">
-        <div class="dropdown-item" (click)="selectItem(item)" *ngIf="item.name !== selectedItem.name">
-          {{item.name}}
+        <ng-container *ngFor="let item of dropdownList">
+            <div class="dropdown-item" (click)="selectItem(item)" *ngIf="item.name !== selectedItem.name">
+                {{item.name}}
+            </div>
+        </ng-container>
+        <div *ngIf='loadingState === 1' class="loader"></div>
+        <div *ngIf="loadingState === -1" class="error-message">
+            No Data
         </div>
-      </ng-container>
-      <div *ngIf='loadingState === 1' class="loader"></div>
-      <div *ngIf="loadingState === -1" class="error-message">
-        No Data
-      </div>
     </div>
-  </div>
+</div>

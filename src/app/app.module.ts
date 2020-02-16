@@ -11,12 +11,17 @@ import { HeaderComponent } from './common/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { AdminModule } from './admin/admin.module';
+import { SharedModule } from './shared/shared.module';
+import { ContextualMenuComponent } from './common/contextual-menu/contextual-menu.component';
+import { OverlayComponent } from './secondary-components/overlay/overlay.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     LandingPageHeaderComponent,
-    HeaderComponent
+    HeaderComponent,
+    ContextualMenuComponent,
+    OverlayComponent
   ],
   imports: [
     BrowserModule,
@@ -25,12 +30,12 @@ import { AdminModule } from './admin/admin.module';
     MatExpansionModule,
     BrowserAnimationsModule,
     FormsModule,
-    AdminModule
-
+    AdminModule,
   ],
   exports: [
     MatExpansionModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'NLDC';
+  showContextualMenu = false;
+
+  toggleContextualMenu(event) {
+    this.showContextualMenu = event;
+  }
 }

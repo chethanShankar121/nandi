@@ -1,0 +1,60 @@
+.menu-wrapper ::ng-deep .mat-expanded.mat-expansion-panel {
+    border-radius: 0;
+}
+
+.menu-wrapper ::ng-deep .mat-expansion-panel-header {
+    font-family: poppins-light;
+    font-weight: 400;
+    padding: 0.2em 1.5em;
+    font-size: 1.1em;
+    /* border-bottom: solid #e2e2e2 1px; */
+    text-transform: uppercase;
+}
+
+.menu-wrapper ::ng-deep .mat-expansion-panel {
+    font-family: poppins-light !important;
+}
+
+.menu-wrapper ::ng-deep .mat-expansion-indicator::after {
+    color: #dedede;
+}
+
+.menu-wrapper ::ng-deep .mat-expansion-panel-body {
+    padding: 0 !important;
+}
+
+.menu-wrapper ::ng-deep .mat-expansion-panel-content {
+    font-family: poppins-light;
+}
+
+.menu-wrapper ::ng-deep .mat-expansion-indicator::after {
+    transform-origin: top;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: none !important;
+}
+
+.mat-expansion-panel-spacing {
+    margin: 0;
+}
+
+.sub-list-container {
+    padding-left: 2em;
+}
+
+.list-item {
+    padding: 0.5em;
+}
+
+.list-item:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+}
+
+.selected-item {
+    background-color: rgba(0, 0, 0, 0.06);
+}
