@@ -27,4 +27,8 @@ export class PropertyTypeSelectComponent implements OnInit {
   ngOnInit() {
   }
 
+  typeSelection(a) {
+    
+  }
+
 }
