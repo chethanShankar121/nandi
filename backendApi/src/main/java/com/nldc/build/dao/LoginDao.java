@@ -35,7 +35,6 @@ public class LoginDao {
 		}, rs -> {
 			rs.last();
 			int size = rs.getRow();
-			System.out.println(rs.getString(3)+""+ size);
 			if(size == 1) { 
 				return new User(rs.getInt(1), rs.getString(2), null, rs.getString(3), rs.getInt(5));
 			}

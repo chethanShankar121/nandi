@@ -16,7 +16,7 @@ public class LoginController {
 	LoginService loginService;
 	
 	@PostMapping(value="/login", consumes = "application/json", produces = "application/json")
-	public AuthModel authAll(@RequestBody User user ) {
+	public AuthModel authAll(@RequestBody User user) {
 		return loginService.authoriseUser(user);
 	}
 
