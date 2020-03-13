@@ -36,12 +36,12 @@ export class CreatePropertyComponent implements OnInit {
       key: 'sell'
     },
     {
-      name: 'rent',
-      key: 'Rent',
+      name: 'Rent',
+      key: 'rent',
     },
     {
-      name: 'lease',
-      key: 'Lease',
+      name: 'Lease',
+      key: 'lease',
     }
   ];
 

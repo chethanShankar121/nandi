@@ -6,13 +6,9 @@
     </div>
     <div class="filter-dropdown absolute" *ngIf="showDropDown">
         <ng-container *ngFor="let item of dropdownList">
-            <div class="dropdown-item" (click)="selectItem(item)" *ngIf="item.name !== selectedItem.name">
+            <div class="dropdown-item" (click)="selectItem(item)">
                 {{item.name}}
             </div>
         </ng-container>
-        <div *ngIf='loadingState === 1' class="loader"></div>
-        <div *ngIf="loadingState === -1" class="error-message">
-            No Data
-        </div>
     </div>
 </div>

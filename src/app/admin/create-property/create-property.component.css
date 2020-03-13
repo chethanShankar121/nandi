@@ -1,6 +1,12 @@
-.wrapper{
+.create-property-wrapper{
     height: 100%;
     overflow: auto;
+    overflow: overlay;
+    background-image: url('../../../assets/background-images/admin-welcome.jpg');
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: darken;
+    background-attachment: fixed;
+    background-size: cover;
 }
 .section-container{
     height:100vh;

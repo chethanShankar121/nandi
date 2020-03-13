@@ -16,7 +16,7 @@ export class ContextualMenuComponent implements OnInit, OnChanges {
   ngOnChanges() {
   }
   onSelect(item) {
-    if(!item.dashboards) {
+    if (!item.dashboards) {
       this.closeMenu.emit(false);
     }
   }
