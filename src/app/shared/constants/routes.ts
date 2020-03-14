@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HomePageComponent } from '../../landing-page/home-page/home-page.component';
 import { AdminLandingPageComponent } from '../../admin/admin-landing-page/admin-landing-page.component';
 import { CreatePropertyComponent } from '../../admin/create-property/create-property.component';
+import { SignupComponent } from '../../landing-page/signup/signup.component';
 export const AllRoutes = [
     {
         path: '',
@@ -10,7 +11,18 @@ export const AllRoutes = [
     },
     {
         path: 'home',
-        component: HomePageComponent
+        children: [
+            {
+                path: '',
+                component: HomePageComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: 'signup',
+                component: SignupComponent,
+                pathMatch: 'full'
+            }
+        ]
     },
     {
         path: 'admin',
@@ -33,9 +45,9 @@ export const AllRoutes = [
     //     component: CreatePropertyComponent,
     //     pathMatch: 'full'
     // },
-    { 
-        path:"**", 
+    {
+        path: "**",
         redirectTo: '/home',
-        pathMatch: 'full' 
+        pathMatch: 'full'
     },
 ];

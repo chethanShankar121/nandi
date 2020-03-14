@@ -14,6 +14,7 @@ import { AdminModule } from './admin/admin.module';
 import { SharedModule } from './shared/shared.module';
 import { ContextualMenuComponent } from './common/contextual-menu/contextual-menu.component';
 import { OverlayComponent } from './secondary-components/overlay/overlay.component';
+import { SignupComponent } from './landing-page/signup/signup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { OverlayComponent } from './secondary-components/overlay/overlay.compone
     LandingPageHeaderComponent,
     HeaderComponent,
     ContextualMenuComponent,
-    OverlayComponent
+    OverlayComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

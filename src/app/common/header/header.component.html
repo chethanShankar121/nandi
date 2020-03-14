@@ -4,9 +4,13 @@
             <img src="assets/icons/menu-icon.svg" (click)="toggleContextualMenu()" alt="">
         </div>
         <div class="logo-container">NLDC</div>
-        <div class="item-list">
-            <div class="nav-item" *ngFor="let item of headerItems">
-                <div>{{item}}</div>
+        <div class="login-icon-container flex flex-center flex-align-center relative"  tabindex = "1" (blur)="showLoginDropDown = false" (click)="toggleDropdown()">
+            <div class="login-icon" >
+                <span class="fas fa-user"></span>
+            </div>
+            <div class="login-dropdown absolute" *ngIf="showLoginDropDown">
+                <div (click)="navigateTo('login')">Login</div>
+                <div (click)="navigateTo('signup')">Signup</div>
             </div>
         </div>
     </div> 
