@@ -3,6 +3,8 @@ import { HomePageComponent } from '../../landing-page/home-page/home-page.compon
 import { AdminLandingPageComponent } from '../../admin/admin-landing-page/admin-landing-page.component';
 import { CreatePropertyComponent } from '../../admin/create-property/create-property.component';
 import { SignupComponent } from '../../landing-page/signup/signup.component';
+import { LoginComponent } from '../../landing-page/login/login.component';
+
 export const AllRoutes = [
     {
         path: '',
@@ -20,6 +22,11 @@ export const AllRoutes = [
             {
                 path: 'signup',
                 component: SignupComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: 'login',
+                component: LoginComponent,
                 pathMatch: 'full'
             }
         ]

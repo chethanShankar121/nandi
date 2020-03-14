@@ -1,4 +1,4 @@
-.signup-page-wrapper{
+.login-page-wrapper{
     background-image: url('../../../assets/background-images/admin-landing-page.jpg');
     background-position: center center;
     background-attachment: fixed;
@@ -10,7 +10,7 @@
     overflow: auto;
     overflow: overlay;
 }
-.signup-content-wrapper{
+.login-content-wrapper{
     background: #fff;
     box-shadow: 0 0 6px 0px #bcbcbc;
     border-radius: 1;
@@ -29,6 +29,7 @@
 }
 .image-container>img{
     max-width: 100%;
+    max-height: 17em;
 }
 .input-field-container{
     display: flex;
@@ -47,7 +48,7 @@
     font-size: 1.8em;
     margin-right: 1em;
 }
-.signup-btn{
+.login-btn{
     width: min-content;
     padding: 0.5em 2em;
     border-radius: 20px;
@@ -65,6 +66,9 @@
     cursor: pointer;
 }
 @media only screen and (max-width: 760px){
+    .login-page-wrapper{
+        padding: 1em;
+    }
     .form-wrapper{
         display: flex;
         flex-direction: column;
@@ -72,12 +76,12 @@
     .form-container{
         width: 100%;
     }
-    .signup-content-wrapper{
-        width: 95%;
+    .login-content-wrapper{
+        width: 100%;
         margin: 5vh 0;
         padding: 3em 2em;
     }
-    .signup-page-wrapper{
+    .login-page-wrapper{
         display: box;
     }
     .image-container{
@@ -87,7 +91,7 @@
 
 }
 @media only screen and (min-width: 1500px){
-    .signup-content-wrapper{
-        width: 45%;
-    }
-    }
+.login-content-wrapper{
+    width: 45%;
+}
+}

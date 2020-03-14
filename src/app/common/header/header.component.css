@@ -44,7 +44,7 @@
     box-shadow: 0 0 5px 1px #bcbcbc;
 }
 .login-dropdown>div{
-    padding:0.2em 1em;
+    padding:0.5em 1em;
 }
 .login-dropdown>div:hover{
     cursor: pointer;

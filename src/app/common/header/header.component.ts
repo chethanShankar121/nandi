@@ -34,5 +34,13 @@ export class HeaderComponent implements OnInit {
         console.log('info', 'Successfully navigated to signup page: ' + response);
       });
     }
+    if (page === 'login') {
+      this.router.navigate(
+        ['home', 'login'],
+        {}
+      ).then(response => {
+        console.log('info', 'Successfully navigated to login page: ' + response);
+      });
+    }
   }
 }

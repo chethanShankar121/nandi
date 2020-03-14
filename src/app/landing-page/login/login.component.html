@@ -1,0 +1,21 @@
+<div class="login-page-wrapper">
+    <div class="login-content-wrapper">
+        <div class="flex flex-wrap form-wrapper">
+            <div class="form-container">
+                <div class="input-field-container">
+                    <mat-icon class="input-icon">account_circle</mat-icon>
+                    <input class="input-field" type="text" name="username" placeholder="Email / Phone" autocomplete="off">
+                </div>
+                <div class="input-field-container">
+                    <mat-icon class="input-icon">lock</mat-icon>
+                    <input class="input-field" type="text" name="password" placeholder="Password" autocomplete="off">
+                </div>
+                <div class="login-btn">Login</div>
+            </div>
+            <div class="image-container">
+                <img src="assets/background-images/login-image.jpg" alt="">
+                <p>Not a member ?</p> <span class="login-link" [routerLink]="['/home/signup']">Signup</span>
+            </div>
+        </div>
+    </div>
+</div>
