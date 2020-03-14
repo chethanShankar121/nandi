@@ -1,40 +1,73 @@
 <div class="signup-page-wrapper">
     <div class="signup-content-wrapper">
         <div class="flex flex-wrap form-wrapper">
-            <div class="form-container">
+            <div class="form-container" [formGroup]="forms">
                 <div class="input-field-container access-role-field">
                     <mat-icon class="input-icon">supervisor_account</mat-icon>
                     <div class="access-role-label">I want to sign up as:</div>
-                    <mat-chip-list aria-label="Fish selection">
-                        <mat-chip>User</mat-chip>
-                        <mat-chip>Broker</mat-chip>
-                    </mat-chip-list>
+                    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="selectUser">
+                      <mat-button-toggle value="100">User</mat-button-toggle>
+                      <mat-button-toggle value="110">Broker</mat-button-toggle>
+                    </mat-button-toggle-group>
+                    <mat-error *ngIf="forms.get('selectUser').hasError('required')">
+                      {{ errors.selectUser }}
+                    </mat-error>
                 </div>
                 <div class="input-field-container">
                     <mat-icon class="input-icon">account_circle</mat-icon>
-                    <input class="input-field" type="text" name="firstName" placeholder="First Name" autocomplete="off">
+                    <input matInput class="input-field" formControlName="firstName" type="text" name="firstName" placeholder="First Name" autocomplete="off" [errorStateMatcher]="matcher">
+                    <mat-error *ngFor="let error of errors.firstName">
+                      <mat-error *ngIf="forms.get('firstName').hasError(error.type)">
+                        {{ error.message }}
+                      </mat-error>
+                    </mat-error>
                 </div>
                 <div class="input-field-container">
                     <mat-icon class="input-icon">account_circle</mat-icon>
-                    <input class="input-field" type="text" name="lastname" placeholder="Last Name" autocomplete="off">
+                    <input matInput class="input-field" formControlName="lastName" type="text" name="lastname" placeholder="Last Name" autocomplete="off" [errorStateMatcher]="matcher">
+                    <mat-error *ngFor="let error of errors.lastName">
+                      <mat-error *ngIf="forms.get('lastName').hasError(error.type)">
+                        {{ error.message }}
+                      </mat-error>
+                    </mat-error>
                 </div>
                 <div class="input-field-container">
                     <mat-icon class="input-icon">phone</mat-icon>
-                    <input class="input-field" type="text" name="phone" placeholder="Phone Number" autocomplete="off">
+                    <input matInput class="input-field" formControlName="phoneNumber" type="text" name="phone" placeholder="Phone Number" autocomplete="off" [errorStateMatcher]="matcher">
+                    <mat-error *ngFor="let error of errors.phoneNumber">
+                      <mat-error *ngIf="forms.get('phoneNumber').hasError(error.type)">
+                        {{ error.message }}
+                      </mat-error>
+                    </mat-error>
                 </div>
                 <div class="input-field-container">
                     <mat-icon class="input-icon">email</mat-icon>
-                    <input class="input-field" type="text" name="email" placeholder="Email" autocomplete="off">
+                    <input matInput class="input-field" formControlName="email"  type="text" name="email" placeholder="Email" autocomplete="off" [errorStateMatcher]="matcher">
+                    <mat-error *ngFor="let error of errors.email">
+                      <mat-error *ngIf="forms.get('email').hasError(error.type)">
+                        {{ error.message }}
+                      </mat-error>
+                    </mat-error>
                 </div>
                 <div class="input-field-container">
                     <mat-icon class="input-icon">lock</mat-icon>
-                    <input class="input-field" type="text" name="password" placeholder="Password" autocomplete="off">
+                    <input matInput class="input-field" formControlName="password" type="text" name="password" placeholder="Password" autocomplete="off" [errorStateMatcher]="matcher">
+                    <mat-error *ngFor="let error of errors.password">
+                      <mat-error *ngIf="forms.get('password').hasError(error.type)">
+                        {{ error.message }}
+                      </mat-error>
+                    </mat-error>
                 </div>
                 <div class="input-field-container">
                     <mat-icon class="input-icon">repeat</mat-icon>
-                    <input class="input-field" type="password" name="rePassword" placeholder="Repeat Password" autocomplete="off">
+                    <input matInput class="input-field" formControlName="repeatPassword" type="password" name="rePassword" placeholder="Repeat Password" autocomplete="off" [errorStateMatcher]="matcher">
+                    <mat-error *ngFor="let error of errors.repeatPassword">
+                      <mat-error *ngIf="forms.get('repeatPassword').hasError(error.type)">
+                        {{ error.message }}
+                      </mat-error>
+                    </mat-error>
                 </div>
-                <div class="signup-btn">Signup</div>
+                <div class="signup-btn" (click)="signUpUser()">Signup</div>
             </div>
             <div class="image-container">
                 <img src="assets/background-images/signup-image.jpg" alt="">

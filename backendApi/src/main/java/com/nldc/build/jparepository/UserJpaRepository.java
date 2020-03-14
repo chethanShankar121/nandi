@@ -1,45 +1,15 @@
-package com.nldc.build.dao;
+package com.nldc.build.jparepository;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementSetter;
-import org.springframework.jdbc.core.RowCallbackHandler;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.nldc.build.model.User;
-import com.nldc.build.model.AuthModel;
-import com.nldc.build.query.UserQuery;
-import com.nldc.build.security.MD5;
 
-@Repository
-public class LoginDao {
+public interface UserJpaRepository extends JpaRepository<User, Long> {
 	
-	@Autowired
-	JdbcTemplate jdbcTemplate;
-	MD5 md5;
+	@Query("Select u from User u where u.email = ?1 and u.password = ?2")
+	List<User> loginUser(String email, String password);
 	
-	public User authUser(User user) {
-		RowCallbackHandler i = null;
-		return (User) jdbcTemplate.query(UserQuery.LOGIN_QUERY, new PreparedStatementSetter() {
-
-			@Override
-			public void setValues(PreparedStatement ps) throws SQLException {
-				ps.setString(1, user.getUserName());
-				ps.setString(2, md5.getMd5(user.getPassword()));
-				
-			}
-			
-		}, rs -> {
-			rs.last();
-			int size = rs.getRow();
-			if(size == 1) { 
-				return new User(rs.getInt(1), rs.getString(2), null, rs.getString(3), rs.getInt(5));
-			}
-			return new User(0, null, null, null, -1);
-		});
-	}
-
 }

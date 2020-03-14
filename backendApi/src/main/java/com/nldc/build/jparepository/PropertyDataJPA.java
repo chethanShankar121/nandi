@@ -1,4 +1,4 @@
-package com.nldc.build.dao;
+package com.nldc.build.jparepository;
 
 import javax.persistence.Entity;
 import com.nldc.build.model.Property;

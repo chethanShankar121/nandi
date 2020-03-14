@@ -9,13 +9,15 @@ import { MaterialModule } from './material-module';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { HeaderComponent } from './common/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from './admin/admin.module';
 import { SharedModule } from './shared/shared.module';
 import { ContextualMenuComponent } from './common/contextual-menu/contextual-menu.component';
 import { OverlayComponent } from './secondary-components/overlay/overlay.component';
 import { SignupComponent } from './landing-page/signup/signup.component';
 import { LoginComponent } from './landing-page/login/login.component';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +37,8 @@ import { LoginComponent } from './landing-page/login/login.component';
     BrowserAnimationsModule,
     FormsModule,
     AdminModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   exports: [
     MatExpansionModule,

@@ -4,11 +4,11 @@ import java.util.HashMap;
 
 public class ResponseModel {
 	
-	private String responseStatus;
+	private int responseStatus;
 	private String responseMessage;
 	private HashMap<String, String> addtionalInfo;
 	
-	public ResponseModel(String status, String message,HashMap<String, String> addtionalInfo){
+	public ResponseModel(int status, String message,HashMap<String, String> addtionalInfo){
 		this.setResponseMessage(message);
 		this.setResponseStatus(status);
 		this.setAddtionalInfo(addtionalInfo);
@@ -22,11 +22,11 @@ public class ResponseModel {
 		this.addtionalInfo = addtionalInfo;
 	}
 
-	public String getResponseStatus() {
+	public int getResponseStatus() {
 		return responseStatus;
 	}
 
-	public void setResponseStatus(String responseStatus) {
+	public void setResponseStatus(int responseStatus) {
 		this.responseStatus = responseStatus;
 	}
 

@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.nldc.build.dao.PropertyDataJPA;
+import com.nldc.build.jparepository.PropertyDataJPA;
 import com.nldc.build.model.Property;
 import com.nldc.build.model.ResponseModel;
 
@@ -20,7 +20,7 @@ public class PropertyService {
 		propertyJpa.save(property);
 		HashMap<String, String> addtionalDetails = new HashMap<>();
 		addtionalDetails.put("propertyId", property.getPropertyID().toString());
-		return new ResponseModel("200", "Successfully added", addtionalDetails);
+		return new ResponseModel(200, "Successfully added", addtionalDetails);
 	}
 	
 	public List<Property> findAllProperties() {
