@@ -9,11 +9,11 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   public saveUser(payload) {
-    console.log(payload);
-    const Headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
     return this.httpClient.post('/nldc/addUser', payload);
+  }
+
+  public loginUser(payload) {
+    return this.httpClient.post('/nldc/login', payload);
   }
 
 }
