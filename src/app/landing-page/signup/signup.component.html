@@ -1,70 +1,94 @@
 <div class="signup-page-wrapper">
     <div class="signup-content-wrapper">
         <div class="flex flex-wrap form-wrapper">
-            <div class="form-container" [formGroup]="forms">
-                <div class="input-field-container access-role-field">
-                    <mat-icon class="input-icon">supervisor_account</mat-icon>
-                    <div class="access-role-label">I want to sign up as:</div>
-                    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="selectUser">
-                      <mat-button-toggle value="100">User</mat-button-toggle>
-                      <mat-button-toggle value="110">Broker</mat-button-toggle>
-                    </mat-button-toggle-group>
-                    <mat-error *ngIf="forms.get('selectUser').hasError('required')">
-                      {{ errors.selectUser }}
+            <div class="form-container" [formGroup]="form">
+                <div class="input-field-container access-role-field flex flex-col ">
+                    <div class="flex flex-align-center">
+                        <mat-icon class="input-icon">supervisor_account</mat-icon>
+                        <div class="access-role-label">I want to sign up as:</div>
+                        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="selectUser">
+                            <mat-button-toggle value="100">User</mat-button-toggle>
+                            <mat-button-toggle value="110">Broker</mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <mat-error *ngIf="selectUser.touched && selectUser.invalid">
+                        <div>It is mandatory to select your access role</div>
                     </mat-error>
                 </div>
-                <div class="input-field-container">
-                    <mat-icon class="input-icon">account_circle</mat-icon>
-                    <input matInput class="input-field" formControlName="firstName" type="text" name="firstName" placeholder="First Name" autocomplete="off" [errorStateMatcher]="matcher">
-                    <mat-error *ngFor="let error of errors.firstName">
-                      <mat-error *ngIf="forms.get('firstName').hasError(error.type)">
-                        {{ error.message }}
-                      </mat-error>
+                <div class="input-field-container flex flex-col">
+                    <div class="flex input-container flex-align-center">
+                        <mat-icon class="input-icon">account_circle</mat-icon>
+                        <input matInput class="input-field" formControlName="firstName" type="text" name="firstName" placeholder="First Name"
+                               autocomplete="off">
+                    </div>
+                    <mat-error *ngIf="(firstName.touched || firstName.dirty) && firstName.invalid">
+                        <div *ngIf="firstName.errors.required">* First name is mandatory</div>
+                        <div *ngIf="firstName.errors.cannotContainSpace">* First name cannot contain space</div>
+                        <div *ngIf="firstName.errors.minlength">* First name should be minimum {{firstName.errors.minlength.requiredLength}} charecters</div>
+                        <div *ngIf="firstName.errors.maxlength">* First name should be less than {{firstName.errors.maxlength.requiredLength}} charecters</div>
+                        <div *ngIf="firstName.errors.shouldBeAlphabet">* First name cannot contain special characters or numbers</div>
                     </mat-error>
                 </div>
-                <div class="input-field-container">
-                    <mat-icon class="input-icon">account_circle</mat-icon>
-                    <input matInput class="input-field" formControlName="lastName" type="text" name="lastname" placeholder="Last Name" autocomplete="off" [errorStateMatcher]="matcher">
-                    <mat-error *ngFor="let error of errors.lastName">
-                      <mat-error *ngIf="forms.get('lastName').hasError(error.type)">
-                        {{ error.message }}
-                      </mat-error>
+                <div class="input-field-container flex flex-col">
+                    <div class="flex input-container flex-align-center">
+                        <mat-icon class="input-icon">account_circle</mat-icon>
+                        <input matInput class="input-field" formControlName="lastName" type="text" name="lastname" placeholder="Last Name" autocomplete="off">
+                    </div>
+                    <mat-error *ngIf="(lastName.touched || lastName.dirty) && lastName.invalid">
+                        <div *ngIf="lastName.errors.required">* Last name is mandatory</div>
+                        <!-- <div *ngIf="lastName.errors.minlength">* Last name should be minimum {{lastName.errors.minlength.requiredLength}} charecters</div> -->
+                        <div *ngIf="lastName.errors.maxlength">* Last name should be less than {{lastName.errors.maxlength.requiredLength}} charecters</div>
+                        <div *ngIf="lastName.errors.shouldBeAlphabet">* Last name cannot contain special characters or numbers</div>
                     </mat-error>
                 </div>
-                <div class="input-field-container">
-                    <mat-icon class="input-icon">phone</mat-icon>
-                    <input matInput class="input-field" formControlName="phoneNumber" type="text" name="phone" placeholder="Phone Number" autocomplete="off" [errorStateMatcher]="matcher">
-                    <mat-error *ngFor="let error of errors.phoneNumber">
-                      <mat-error *ngIf="forms.get('phoneNumber').hasError(error.type)">
-                        {{ error.message }}
-                      </mat-error>
+                <div class="input-field-container flex flex-col">
+                    <div class="flex flex-align-center input-container">
+                        <mat-icon class="input-icon">phone</mat-icon>
+                        <input matInput class="input-field" formControlName="phoneNumber" type="text" name="phone" placeholder="Phone Number" autocomplete="off"
+                               [errorStateMatcher]="matcher">
+                    </div>
+                    <mat-error *ngIf="(phoneNumber.touched || phoneNumber.dirty) && phoneNumber.invalid">
+                        <div *ngIf="phoneNumber.errors.required">* Phone number is mandatory</div>
+                        <div *ngIf="phoneNumber.errors.minlength">* Last name should be minimum {{phoneNumber.errors.minlength.requiredLength}} charecters</div>
+                        <div *ngIf="phoneNumber.errors.maxlength">* Phone Number should be less than {{phoneNumber.errors.maxlength.requiredLength}} charecters
+                        </div>
+                        <div *ngIf="phoneNumber.errors.shouldBeNumbers">* Phone number cannot contain special characters or alphabet</div>
                     </mat-error>
                 </div>
-                <div class="input-field-container">
-                    <mat-icon class="input-icon">email</mat-icon>
-                    <input matInput class="input-field" formControlName="email"  type="text" name="email" placeholder="Email" autocomplete="off" [errorStateMatcher]="matcher">
-                    <mat-error *ngFor="let error of errors.email">
-                      <mat-error *ngIf="forms.get('email').hasError(error.type)">
-                        {{ error.message }}
-                      </mat-error>
+                <div class="input-field-container flex flex-col">
+                    <div class="flex input-container flex-align-center">
+                        <mat-icon class="input-icon">email</mat-icon>
+                        <input matInput class="input-field" formControlName="email" type="text" name="email" placeholder="Email" autocomplete="off"
+                               [errorStateMatcher]="matcher">
+                    </div>
+                    <mat-error *ngIf="(email.touched || email.dirty) && email.invalid">
+                        <div *ngIf="email.errors.required">* Email is mandatory</div>
+                        <div *ngIf="email.errors.maxlength">* Email should be less than {{email.errors.maxlength.requiredLength}} charecters
+                        </div>
+                        <div *ngIf="email.errors.invalidEmail">* Doesn't look like a valid email</div>
                     </mat-error>
                 </div>
-                <div class="input-field-container">
-                    <mat-icon class="input-icon">lock</mat-icon>
-                    <input matInput class="input-field" formControlName="password" type="text" name="password" placeholder="Password" autocomplete="off" [errorStateMatcher]="matcher">
-                    <mat-error *ngFor="let error of errors.password">
-                      <mat-error *ngIf="forms.get('password').hasError(error.type)">
-                        {{ error.message }}
-                      </mat-error>
+                <div class="input-field-container flex flex-col">
+                    <div class="flex input-container flex-align-center">
+                        <mat-icon class="input-icon">lock</mat-icon>
+                        <input matInput class="input-field" formControlName="password" type="password" name="password" placeholder="Password" 
+                        autocomplete="off">
+                    </div>
+                    <mat-error *ngIf="(password.touched || password.dirty) && password.invalid">
+                        <div *ngIf="password.errors.required">* Password is mandatory</div>
+                        <div *ngIf="password.errors.maxlength">* Password should be less than {{password.errors.maxlength.requiredLength}} charecters
+                        </div>
+                        <div *ngIf="password.errors.minlength">* Password should be minimum {{password.errors.minlength.requiredLength}} charecters</div>
                     </mat-error>
                 </div>
-                <div class="input-field-container">
-                    <mat-icon class="input-icon">repeat</mat-icon>
-                    <input matInput class="input-field" formControlName="repeatPassword" type="password" name="rePassword" placeholder="Repeat Password" autocomplete="off" [errorStateMatcher]="matcher">
-                    <mat-error *ngFor="let error of errors.repeatPassword">
-                      <mat-error *ngIf="forms.get('repeatPassword').hasError(error.type)">
-                        {{ error.message }}
-                      </mat-error>
+                <div class="input-field-container flex flex-col">
+                    <div class="flex input-container flex-align-center">
+                        <mat-icon class="input-icon">repeat</mat-icon>
+                        <input matInput class="input-field" formControlName="repeatPassword" type="password" name="rePassword" placeholder="Password" 
+                        autocomplete="off" [errorStateMatcher]="matcher">
+                    </div>
+                    <mat-error *ngIf="repeatPassword.touched || repeatPassword.dirty">
+                        <div *ngIf="passwordValidator()">* Passwords do not match</div>
                     </mat-error>
                 </div>
                 <div class="signup-btn" (click)="signUpUser()">Signup</div>

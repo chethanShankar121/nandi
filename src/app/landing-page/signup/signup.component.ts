@@ -1,5 +1,6 @@
+import { patternValidators } from './../../shared/validators/pattern.validator';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ErrorMatcher, MyErrorStateMatcher, errorMessages } from '../../shared/commmonConfiguration/errorMatcher';
 import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
@@ -12,30 +13,76 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit, OnDestroy {
 
-  forms: any;
   matcher: MyErrorStateMatcher = new MyErrorStateMatcher();
   errors: any = errorMessages;
   subscribeList: Array<Subscription> = [];
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
-    this.forms = this.fb.group({
-      selectUser: ['', [Validators.required]],
-      firstName: ['', [Validators.required, Validators.pattern('[a-zA-z ]*'), Validators.maxLength(60), Validators.minLength(5)]],
-      lastName: ['', [Validators.required, Validators.pattern('[a-zA-z ]*'), Validators.maxLength(60), Validators.minLength(5)]],
-      phoneNumber: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.maxLength(15), Validators.minLength(5)]],
-      email: ['', [Validators.required, Validators.email, Validators.maxLength(120), Validators.minLength(10)]],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(60)]],
-      repeatPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(60), ErrorMatcher.matchValues('password')]]
-    });
-   }
+  constructor(private userService: UserService, private router: Router) {
 
+  }
+  form = new FormGroup({
+    selectUser: new FormControl('', [Validators.required]),
+    firstName: new FormControl('',
+      [Validators.required,
+      Validators.maxLength(60),
+      Validators.minLength(3),
+      patternValidators.cannotContainSpace,
+      patternValidators.shouldBeAlphabet
+      ]),
+    lastName: new FormControl('',
+      [Validators.required,
+      Validators.maxLength(60),
+      patternValidators.shouldBeAlphabet
+      ]),
+    phoneNumber: new FormControl('',
+      [Validators.required,
+      Validators.maxLength(15),
+      Validators.minLength(5),
+      patternValidators.shouldBeNumbers
+      ]),
+    email: new FormControl('',
+      [Validators.required,
+      patternValidators.emailPattern,
+      Validators.maxLength(120)
+      ]),
+    password: new FormControl('',
+      [Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(60)]),
+    repeatPassword: new FormControl('',
+      [Validators.required]),
+  });
+  passwordValidator() {
+    const condition = this.password.value !== this.repeatPassword.value;
+    return condition;
+  }
   ngOnInit() {
   }
-
+  get selectUser() {
+    return this.form.get('selectUser');
+  }
+  get firstName() {
+    return this.form.get('firstName');
+  }
+  get lastName() {
+    return this.form.get('lastName');
+  }
+  get phoneNumber() {
+    return this.form.get('phoneNumber');
+  }
+  get email() {
+    return this.form.get('email');
+  }
+  get repeatPassword() {
+    return this.form.get('repeatPassword');
+  }
+  get password() {
+    return this.form.get('password');
+  }
   public signUpUser() {
-    if (this.forms.valid) {
+    if (this.form.valid) {
       this.subscribeList.push(this.userService.saveUser(this.processFormData()).subscribe(response => {
-        if(response['responseStatus'] === 200) {
+        if (response['responseStatus'] === 200) {
           alert("Successfully Added");
           this.router.navigateByUrl("/home/login");
         }
@@ -45,12 +92,12 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   private processFormData() {
     return {
-      accessRole: parseInt(this.forms.get('selectUser').value),
-      firstName: this.forms.get('firstName').value,
-      lastName: this.forms.get('lastName').value,
-      phone: this.forms.get('phoneNumber').value,
-      email: this.forms.get('email').value,
-      password: this.forms.get('password').value,
+      accessRole: parseInt(this.selectUser.value),
+      firstName: this.firstName.value,
+      lastName: this.lastName.value,
+      phone: this.phoneNumber.value,
+      email: this.email.value,
+      password: this.password.value,
     };
   }
 

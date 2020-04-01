@@ -23,6 +23,12 @@
 .form-container{
     width: 60%;
 }
+.form-container ::ng-deep .mat-button-toggle-group{
+    border-radius: 30px;
+}
+.form-container ::ng-deep .mat-button-toggle-label-content{
+    line-height: 30px;
+}
 .image-container{
     width: 40%;
     padding: 2em;
@@ -31,12 +37,13 @@
     max-width: 100%;
 }
 .input-field-container{
-    display: flex;
+    margin-bottom: 1.5em;
+}
+.input-container{
     align-items: center;
     padding: 6px 12px 3px 0;
     width: min-content;
     border-bottom: solid #353535 1px;
-    margin-bottom: 1.5em;
 }
 .access-role-field{
     width: 100%;
@@ -58,7 +65,7 @@
 .input-icon{
     color: #353535;
     font-size: 1.8em;
-    margin-right: 1em;
+    margin-right: 0.3em;
 }
 .signup-btn{
     width: min-content;
