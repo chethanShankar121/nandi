@@ -18,9 +18,14 @@ public class LoginService {
 	
 	public AuthModel authoriseUser(User user) {
 		user.setPassword(MD5.getMd5(user.getPassword()));
-		List<User> loginResults =  loginJpaRepository.loginUser(user.getEmail(), user.getPassword());
+		List<User> loginResults = null;
+		if(user.getEmail() != null) {
+			loginResults = loginJpaRepository.loginUser(user.getEmail(), user.getPassword());
+		} else {
+			loginResults = loginJpaRepository.loginUserPhoneNumber(user.getPhone(), user.getPassword());
+		}
 		if(loginResults.size() == 1)
-			return new AuthModel(200, "Logged In successfully", "", loginResults.get(0).getFirstName() + loginResults.get(0).getLastName(), loginResults.get(0).getAccessRole());
+			return new AuthModel(200, "Logged In successfully", MD5.getMd5(loginResults.get(0).getEmail() + loginResults.get(0).getPhone()), loginResults.get(0).getFirstName() + loginResults.get(0).getLastName(), loginResults.get(0).getAccessRole());
 		else
 			return new AuthModel(401, "Loging failure", "", "", -1);
 	}

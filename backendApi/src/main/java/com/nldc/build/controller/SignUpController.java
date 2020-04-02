@@ -17,8 +17,12 @@ public class SignUpController {
 
 	@PostMapping(value="/addUser", consumes="application/json", produces="application/json")
 	public ResponseModel addUser(@RequestBody User user) {
-		System.out.println(user.toString());
 		return signUpService.addUser(user);
 	}
+	
+//	@PostMapping(value="/addUser/sendOtp", consumes="application/json", produces="application/json")
+//	public ResponseModel sendOtp() {
+//		return 
+//	}
 	
 }
