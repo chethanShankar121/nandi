@@ -1,12 +1,18 @@
 package com.nldc.build.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "User")
@@ -14,7 +20,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@Column(name="firstName")
 	private String firstName;
@@ -44,10 +50,19 @@ public class User {
 	@Column(name="accessRole")
 	private int accessRole;
 	
+	@Column(name="emailVerifed")
+	private boolean isEmailVerified;
+	
+	@Column(name="phoneNumberVerifed")
+	private boolean isPhoneNumberVerified;
+	
+	@OneToMany(mappedBy="userId")
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private List<OTP> otps;
+	
 	public User() {}
 	
-
-	public User(int id, String firstName, String lastName, String phone, int accessRole, Byte[] profilePic, String identityNumber, String email, String address, String password) {
+	public User(Long id, String firstName, String lastName, String phone, int accessRole, Byte[] profilePic, String identityNumber, String email, String address, String password, boolean isEmailVerified, boolean isPhoneNUmberVerified) {
 		this.setId(id);
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
@@ -58,15 +73,17 @@ public class User {
 		this.setAddress(address);
 		this.setPassword(password);
 		this.setAccessRole(accessRole);
+		this.setIsEmailVerified(isEmailVerified);
+		this.setIsPhoneNumberVerified(isPhoneNUmberVerified);
 	}
 
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -160,6 +177,43 @@ public class User {
 		this.accessRole = accessRole;
 	}
 	
+	
+	public boolean getIsEmailVerified() {
+		return isEmailVerified;
+	}
+
+
+	public void setIsEmailVerified(boolean isEmailVerified) {
+		this.isEmailVerified = isEmailVerified;
+	}
+
+
+	public boolean getIsPhoneNumberVerified() {
+		return isPhoneNumberVerified;
+	}
+
+
+	public void setIsPhoneNumberVerified(boolean isPhoneNumberVerified) {
+		this.isPhoneNumberVerified = isPhoneNumberVerified;
+	}
+
+	
+	public List<OTP> getOtps() {
+		return otps;
+	}
+
+	public void setOtps(List<OTP> otps) {
+		this.otps = otps;
+	}
+
+	public void setEmailVerified(boolean isEmailVerified) {
+		this.isEmailVerified = isEmailVerified;
+	}
+
+	public void setPhoneNumberVerified(boolean isPhoneNumberVerified) {
+		this.isPhoneNumberVerified = isPhoneNumberVerified;
+	}
+
 	@Override
 	public String toString() {
 		return this.getEmail() + this.getFirstName() + this.getLastName();

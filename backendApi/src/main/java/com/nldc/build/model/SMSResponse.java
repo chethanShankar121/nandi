@@ -11,7 +11,16 @@ public class SMSResponse {
 	Message message;
 	List<Messages> messages;
 	String status;
+	List<Error> errors;
 	
+	public List<Error> getErrors() {
+		return errors;
+	}
+
+	public void setErrors(List<Error> errors) {
+		this.errors = errors;
+	}
+
 	SMSResponse() {}
 	
 	SMSResponse(int balance, int batch_id, int cost, int num_messages, Message message, List<Messages> messages, String status) {
@@ -143,4 +152,34 @@ class Message {
 	public void setContent(String content) {
 		this.content = content;
 	}
+}
+
+class Error {
+	int code;
+	String message;
+	
+	Error() {}
+	
+	Error(int code, String message) {
+		this.setCode(code);
+		this.setMessage(message);
+	}
+
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	
 }

@@ -15,4 +15,5 @@ public interface UserJpaRepository extends JpaRepository<User, Long> {
 	@Query("Select u from User u where u.phone = ?1 and u.password = ?2")
 	List<User> loginUserPhoneNumber(String phoneNumber, String password);
 	
+	
 }
