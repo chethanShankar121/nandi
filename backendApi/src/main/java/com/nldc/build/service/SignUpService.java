@@ -33,6 +33,15 @@ public class SignUpService {
 	MailService mailService;
 
 	public ResponseModel addUser(User user) {
+		Optional<User> userWithEmail = this.userJpaRepository.findByEmail(user.getEmail());
+		Optional<User> userWithPhone = this.userJpaRepository.findByPhone(user.getPhone());
+		
+		if(userWithEmail.isPresent() || userWithPhone.isPresent()) {
+			HashMap<String, String> additonalDetails = new HashMap<String, String>();
+			additonalDetails.put("redirectTo", "login");
+			return new ResponseModel(200, "User already exists", additonalDetails);
+		}
+		
 		this.userJpaRepository.save(user);
 		HashMap<String, String> userDetails = new HashMap<String, String>();
 		userDetails.put("UserId", user.getId() + "");
