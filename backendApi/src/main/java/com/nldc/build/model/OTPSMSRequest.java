@@ -2,26 +2,26 @@ package com.nldc.build.model;
 
 public class OTPSMSRequest {
 	
-	String to;
+	String numbers;
 	String sender;
-	String body;
-	String userName;
+	String message;
+	String apikey;
 	
 	public OTPSMSRequest() {}
 	
-	public OTPSMSRequest(String to, String Sender, String body, String userName) {
-		this.setUserName(userName);
-		this.setBody(body);
+	public OTPSMSRequest(String numbers, String Sender, String message, String apiKey) {
+		this.setApikey(apiKey);
+		this.setMessage(message);
+		this.setNumbers("91" + numbers);
 		this.setSender(Sender);
-		this.setTo(to);
 	}
 
-	public String getTo() {
-		return to;
+	public String getNumbers() {
+		return numbers;
 	}
 
-	public void setTo(String to) {
-		this.to =  "+91" + to;
+	public void setNumbers(String numbers) {
+		this.numbers = numbers;
 	}
 
 	public String getSender() {
@@ -32,20 +32,19 @@ public class OTPSMSRequest {
 		this.sender = sender;
 	}
 
-	public String getBody() {
-		return body;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setBody(String body) {
-		this.body = "Dear " + this.userName + ", Thank you for registering for the Nandi Construction, Please use the OTP " + body + "for further process.";
+	public void setMessage(String message) {
+		this.message = "Dear Sir/Madam, Thank you for registering to NLDC constructions your mobile verification OTP is " + message;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getApikey() {
+		return apikey;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setApikey(String apikey) {
+		this.apikey = apikey;
 	}
-
 }
