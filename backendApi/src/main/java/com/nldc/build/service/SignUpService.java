@@ -31,23 +31,21 @@ public class SignUpService {
 
 	@Autowired
 	MailService mailService;
-
+	
+	@Autowired
+	Responses responses;	
+	
 	public ResponseModel addUser(User user) {
 		Optional<User> userWithEmail = this.userJpaRepository.findByEmail(user.getEmail());
 		Optional<User> userWithPhone = this.userJpaRepository.findByPhone(user.getPhone());
-
-		if (userWithEmail.isPresent() || userWithPhone.isPresent()) {
-			HashMap<String, String> additonalDetails = new HashMap<String, String>();
-			additonalDetails.put("redirectTo", "login");
-			return new ResponseModel(200, "User already exists", additonalDetails);
+		HashMap<String, Object> userDetails = new HashMap<String, Object>();
+		userDetails.put("additonalDetails", user);
+		if (userWithEmail.isPresent() || userWithPhone.isPresent()) {			
+			return this.responses.userAlreadyExsits(userDetails);
 		}
 		this.userJpaRepository.deleteUnVerifiedUser(user.getPhone(), user.getEmail());
 		this.userJpaRepository.save(user);
-		HashMap<String, String> userDetails = new HashMap<String, String>();
-		userDetails.put("UserId", user.getId() + "");
-		userDetails.put("email", user.getEmail());
-		userDetails.put("mobile", user.getPhone());
-		return new ResponseModel(200, "added User successfully", userDetails);
+		return this.responses.addedUserSuccessFulyy(userDetails);
 	}
 
 	public ResponseModel sendOtp(OtpRequest otpRequest) {
@@ -55,41 +53,32 @@ public class SignUpService {
 		if (requestedUser.isPresent()) {
 			this.otpRepository.deleteByUserId(otpRequest.getUserId());
 			User user = requestedUser.get();
-			Random rnd = new Random();
-			String mobileOTP = String.format("%06d", rnd.nextInt(999999));
-			String emailOTP = String.format("%06d", rnd.nextInt(999999));
 			if (otpRequest.getOperation().equalsIgnoreCase("both")) {
-				this.otpRepository.save(new OTP(emailOTP, "email", otpRequest.getUserId(), null));
-				this.otpRepository.save(new OTP(mobileOTP, "mobile", otpRequest.getUserId(), null));
 				try {
-					ResponseModel smsResponse = this.sms.sendSms(user.getFirstName() + user.getLastName(), mobileOTP,
-							user.getPhone());
+					ResponseModel smsResponse = this.sendMobileOtp(user);
 					if (smsResponse.getResponseStatus() == 200) {
-						return this.mailService.sendEmail(user, emailOTP);
+						return this.sendEmailOtp(user);
 					} else {
-						return new ResponseModel(412, "Not able to send message", null);
+						return this.responses.notAbleToSendMessage();
 					}
 				} catch (Exception e) {
-					System.out.println("OTP Error = " + e.getMessage());
-					return new ResponseModel(412, "Not able to send message", null);
+					return this.responses.notAbleToSendMessage();
 				}
 			} else if (otpRequest.getOperation().equalsIgnoreCase("mail")) {
 				try {
-					return this.mailService.sendEmail(user, emailOTP);
+					return this.sendEmailOtp(user);
 				} catch (Exception e) {
-					System.out.println("OTP Error = " + e.getMessage());
-					return new ResponseModel(412, "Not able to send message", null);
+					return this.responses.notAbleToSendMessage();
 				}
 			} else if (otpRequest.getOperation().equalsIgnoreCase("mobile")) {
 				try {
-					return this.sms.sendSms(user.getFirstName() + user.getLastName(), mobileOTP, user.getPhone());
+					return this.sendMobileOtp(user);
 				} catch (Exception e) {
-					System.out.println("OTP Error = " + e.getMessage());
-					return new ResponseModel(412, "Not able to send message", null);
+					return this.responses.notAbleToSendMessage();
 				}
 			}
 		} else {
-			return new ResponseModel(200, "User not found", null);
+			return this.responses.userNotFound();
 		}
 		return new ResponseModel(200, "Not able to send sms", null);
 	}
@@ -101,17 +90,14 @@ public class SignUpService {
 			List<OTP> otps = user.getOtps();
 			boolean verified = true;
 			for (OTP otp : otps) {
-				switch (otp.getOtpFor()) {
-				case "email":
+				if(otp.getOtpFor().equals("email")) {	
 					if (!otp.getOtp().equals(Integer.toString(otpRequest.getEmailOtp()))) {
 						verified = false;
 					}
-					break;
-				case "mobile":
+				} else if (otp.getOtpFor().equals("mobile")) {
 					if (!otp.getOtp().equals(Integer.toString(otpRequest.getMobileOtp()))) {
 						verified = false;
 					}
-					break;
 				}
 			}
 			if (verified) {
@@ -120,11 +106,25 @@ public class SignUpService {
 				this.userJpaRepository.save(user);
 				return new ResponseModel(200, "User Verification Completed", null);
 			} else {
-				return new ResponseModel(200, "User Verification is not completed", null);
+				return new ResponseModel(200, "User Verification is failed", null);
 			}
 		} else {
 			return new ResponseModel(200, "User not found", null);
 		}
 	}
 
+	public ResponseModel sendMobileOtp(User user) {
+		Random rnd = new Random();
+		String mobileOTP = String.format("%06d", rnd.nextInt(999999));
+		this.otpRepository.save(new OTP(mobileOTP, "mobile", user.getId(), null));
+		return this.sms.sendSms(user.getFirstName() + user.getLastName(), mobileOTP,
+				user.getPhone());
+	}
+	
+	public ResponseModel sendEmailOtp(User user) {
+		Random rnd = new Random();
+		String emailOTP = String.format("%06d", rnd.nextInt(999999));
+		this.otpRepository.save(new OTP(emailOTP, "email", user.getId(), null));
+		return this.mailService.sendEmail(user, emailOTP);
+	}
 }

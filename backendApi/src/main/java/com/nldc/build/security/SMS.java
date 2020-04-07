@@ -7,7 +7,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.nldc.build.model.OTPSMSRequest;
 import com.nldc.build.model.ResponseModel;
 import com.nldc.build.model.SMSResponse;
 
