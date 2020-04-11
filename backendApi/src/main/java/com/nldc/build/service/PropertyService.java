@@ -18,8 +18,8 @@ public class PropertyService {
 	
 	public ResponseModel addProperty(Property property) {
 		propertyJpa.save(property);
-		HashMap<String, String> addtionalDetails = new HashMap<>();
-		addtionalDetails.put("propertyId", property.getPropertyID().toString());
+		HashMap<String, Object> addtionalDetails = new HashMap<>();
+		addtionalDetails.put("propertyId", property);
 		return new ResponseModel(200, "Successfully added", addtionalDetails);
 	}
 	

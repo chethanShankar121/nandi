@@ -6,19 +6,19 @@ public class ResponseModel {
 	
 	private int responseStatus;
 	private String responseMessage;
-	private HashMap<String, String> addtionalInfo;
+	private HashMap<String, Object> addtionalInfo;
 	
-	public ResponseModel(int status, String message,HashMap<String, String> addtionalInfo){
+	public ResponseModel(int status, String message,HashMap<String, Object> addtionalInfo){
 		this.setResponseMessage(message);
 		this.setResponseStatus(status);
 		this.setAddtionalInfo(addtionalInfo);
 	}
 	
-	public HashMap<String, String> getAddtionalInfo() {
+	public HashMap<String, Object> getAddtionalInfo() {
 		return addtionalInfo;
 	}
 
-	public void setAddtionalInfo(HashMap<String, String> addtionalInfo) {
+	public void setAddtionalInfo(HashMap<String, Object> addtionalInfo) {
 		this.addtionalInfo = addtionalInfo;
 	}
 

@@ -4,75 +4,25 @@ import java.util.List;
 
 public class SMSResponse {
 	
-	int balance;
-	int batch_id;
-	int cost;
-	int num_messages;
-	Message message;
-	List<Messages> messages;
 	String status;
-	List<Error> errors;
+	Message message;
+	List<Messages> data;
+	List<Errors> errors;
 	
-	public List<Error> getErrors() {
+	SMSResponse() {}
+	
+	SMSResponse(String status, Message message, List<Messages> data) {
+		this.setData(data);
+		this.setMessage(message);
+		this.setStatus(status);
+	}
+
+	public List<Errors> getErrors() {
 		return errors;
 	}
 
-	public void setErrors(List<Error> errors) {
+	public void setErrors(List<Errors> errors) {
 		this.errors = errors;
-	}
-
-	SMSResponse() {}
-	
-	SMSResponse(int balance, int batch_id, int cost, int num_messages, Message message, List<Messages> messages, String status) {
-		
-	}
-	
-	public int getBalance() {
-		return balance;
-	}
-
-	public void setBalance(int balance) {
-		this.balance = balance;
-	}
-
-	public int getBatch_id() {
-		return batch_id;
-	}
-
-	public void setBatch_id(int batch_id) {
-		this.batch_id = batch_id;
-	}
-
-	public int getCost() {
-		return cost;
-	}
-
-	public void setCost(int cost) {
-		this.cost = cost;
-	}
-
-	public int getNum_messages() {
-		return num_messages;
-	}
-
-	public void setNum_messages(int num_messages) {
-		this.num_messages = num_messages;
-	}
-
-	public Message getMessage() {
-		return message;
-	}
-
-	public void setMessage(Message message) {
-		this.message = message;
-	}
-
-	public List<Messages> getMessages() {
-		return messages;
-	}
-
-	public void setMessages(List<Messages> messages) {
-		this.messages = messages;
 	}
 
 	public String getStatus() {
@@ -83,57 +33,37 @@ public class SMSResponse {
 		this.status = status;
 	}
 
-}
-
-class Messages {
-	private int id;
-	private int recipient;
-	
-	Messages() {}
-	
-	Messages(int id, int recipient) {
-		this.setId(id);
-		this.setRecipient(recipient);
+	public Message getMessage() {
+		return message;
 	}
 
-	public int getId() {
-		return id;
+	public void setMessage(Message message) {
+		this.message = message;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public List<Messages> getData() {
+		return data;
 	}
 
-	public int getRecipient() {
-		return recipient;
-	}
-
-	public void setRecipient(int recipient) {
-		this.recipient = recipient;
+	public void setData(List<Messages> data) {
+		this.data = data;
 	}
 		
 }
 
-
 class Message {
 	
-	int num_parts;
+	String num_parts;
 	String sender;
 	String content;
 	
 	Message() {}
-	
-	Message(int num_parts, String sender, String content) {
-		this.setContent(content);
-		this.setSender(sender);
-		this.setNum_parts(num_parts);
-	}
 
-	public int getNum_parts() {
+	public String getNum_parts() {
 		return num_parts;
 	}
 
-	public void setNum_parts(int num_parts) {
+	public void setNum_parts(String num_parts) {
 		this.num_parts = num_parts;
 	}
 
@@ -152,18 +82,39 @@ class Message {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
 }
 
-class Error {
+class Messages {
+	
+	String id;
+	String recipient;
+	
+	Messages() {}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getRecipient() {
+		return recipient;
+	}
+
+	public void setRecipient(String recipient) {
+		this.recipient = recipient;
+	}
+	
+}
+
+class Errors {
 	int code;
 	String message;
 	
-	Error() {}
-	
-	Error(int code, String message) {
-		this.setCode(code);
-		this.setMessage(message);
-	}
+	Errors() {}
 
 	public int getCode() {
 		return code;
@@ -180,6 +131,4 @@ class Error {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
-	
 }
