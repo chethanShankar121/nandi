@@ -1,11 +1,13 @@
-import { patternValidators } from './../../shared/validators/pattern.validator';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ErrorMatcher, MyErrorStateMatcher, errorMessages } from '../../shared/commmonConfiguration/errorMatcher';
-import { UserService } from 'src/app/services/user.service';
-import { Subscription } from 'rxjs';
+import { ErrorHandlingService } from './../../services/error-handling.service';
+import { environment } from './../../../environments/environment';
+import { CommonResponseService } from './../../services/commonResponse.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
+import { errorMessages, MyErrorStateMatcher } from '../../shared/commmonConfiguration/errorMatcher';
+import { patternValidators } from './../../shared/validators/pattern.validator';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -14,10 +16,22 @@ import { Router } from '@angular/router';
 export class SignupComponent implements OnInit, OnDestroy {
 
   matcher: MyErrorStateMatcher = new MyErrorStateMatcher();
-  errors: any = errorMessages;
-  subscribeList: Array<Subscription> = [];
+  errorMessage;
+  showVerifiactionWidget: boolean = false;
+  apiStatus;
+  addUserObj = {
+    response: null,
+    status: null,
+    error: null
+  };
+  private addUserSubscription: Subscription;
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private commonResponseService: CommonResponseService,
+    private errorHandling: ErrorHandlingService
+  ) {
 
   }
   form = new FormGroup({
@@ -80,13 +94,29 @@ export class SignupComponent implements OnInit, OnDestroy {
     return this.form.get('password');
   }
   public signUpUser() {
-    if (this.form.valid) {
-      this.subscribeList.push(this.userService.saveUser(this.processFormData()).subscribe(response => {
-        if (response['responseStatus'] === 200) {
-          alert("Successfully Added");
-          this.router.navigateByUrl("/home/login");
-        }
-      }));
+    try {
+      if (this.form.valid) {
+        this.apiStatus = 0;
+        const url = environment.addUser.url;
+        const method = environment.addUser.method;
+        const payload = this.processFormData();
+        this.addUserSubscription = this.commonResponseService.getData(url, method, payload)
+          .subscribe(response => {
+            if (response['responseStatus'] === 200) {
+              this.apiStatus = -1;
+              alert('user added');
+              this.showVerifiactionWidget = true;
+            }
+          }, error => {
+            this.apiStatus = -1;
+            this.errorMessage = 'userSignupError';
+            this.errorHandling.handleAPIError(error);
+          });
+      }
+    } catch (error) {
+      this.apiStatus = -1;
+      this.errorMessage = 'jsError';
+      this.errorHandling.handleJavascriptError(error);
     }
   }
 
@@ -102,7 +132,12 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscribeList.forEach(subscription => subscription.unsubscribe());
+    try {
+      if (this.addUserSubscription) {
+        this.addUserSubscription.unsubscribe()
+      }
+    } catch (error) {
+      this.errorHandling.handleJavascriptError(error);
+    }
   }
-
 }
