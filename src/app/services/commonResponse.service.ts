@@ -29,14 +29,14 @@ export class CommonResponseService {
         if (method.toLowerCase() === 'get') {
             const observable = this.http.get(updatedUrl, headers).pipe(
                 map(response => {
-                    return JSON.parse(JSON.stringify(response['data']));
+                    return JSON.parse(JSON.stringify(response));
                 }),
                 catchError(error => this.errorHandling.handleAPIError(error)));
             return observable;
         } else if (method.toLowerCase() === 'post') {
             const observable = this.http.post(updatedUrl, payLoad, headers).pipe(
                 map(response => {
-                    return JSON.parse(JSON.stringify(response['data']));
+                    return JSON.parse(JSON.stringify(response));
                 }),
                 catchError(error => this.errorHandling.handleAPIError(error)));
             return observable;
@@ -46,7 +46,7 @@ export class CommonResponseService {
                     if (!response) {
                         return response;
                     }
-                    return response['_body'] ? JSON.parse(response['_body']) : response;
+                    return response ? JSON.parse(JSON.stringify(response)) : response;
                 }),
                 catchError(error => this.errorHandling.handleAPIError(error)));
 
@@ -54,7 +54,7 @@ export class CommonResponseService {
         } else if (method.toLowerCase() === 'delete') {
             const httpObservable = this.http.delete(updatedUrl, headers).pipe(
                 map(response => {
-                    return response['_body'] ? JSON.parse(response['_body']) : response;
+                    return response ? JSON.parse(JSON.stringify(response)) : response;
                 }),
                 catchError(error => this.errorHandling.handleAPIError(error)));
 

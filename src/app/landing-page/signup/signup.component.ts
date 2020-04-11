@@ -103,7 +103,7 @@ export class SignupComponent implements OnInit, OnDestroy {
         this.addUserSubscription = this.commonResponseService.getData(url, method, payload)
           .subscribe(response => {
             if (response['responseStatus'] === 200) {
-              this.apiStatus = -1;
+              this.apiStatus = 1;
               alert('user added');
               this.showVerifiactionWidget = true;
             }
