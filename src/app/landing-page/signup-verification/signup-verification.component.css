@@ -7,6 +7,7 @@
 }
 .input-field-container{
     padding-bottom: 2em;
+    padding-top: 0.1em;
 }
 .input-field-container:last-child{
     padding-bottom: 0;
@@ -33,13 +34,20 @@
     font-size: 0.85em;
     padding: 0.5em 1.5em;
 }
+.button:hover{
+    cursor: pointer;
+    background-color: #000;
+}
 .otp-field{
     letter-spacing: 2em;
 }
 .otp-field::placeholder{
     letter-spacing: 1px;
 }
-
+.disabled{
+    pointer-events: none;
+    background-color: #bcbcbc;
+}
 @media only screen and (max-width: 600px) {
     .input-flex-wrapper{
         flex-direction: column;

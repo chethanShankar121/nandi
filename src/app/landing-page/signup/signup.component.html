@@ -102,7 +102,7 @@
         </div>
         <app-error-message [errorMessage]="errorMessage" *ngIf="apiStatus === -1"></app-error-message>
         <div class="signup-verification-wrapper full-width full-height" *ngIf="showVerifiactionWidget && apiStatus === 1">
-            <app-signup-verification></app-signup-verification>
+            <app-signup-verification ></app-signup-verification>
         </div>
         <app-widget-loader *ngIf="apiStatus === 0"></app-widget-loader>
     </div>

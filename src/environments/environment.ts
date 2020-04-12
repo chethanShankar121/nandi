@@ -13,6 +13,10 @@ export const environment = {
   loginUser: {
     url: '/nldc/login',
     method: 'post'
+  },
+  sendOtp: {
+    url: '/addUser/sendOtp',
+    method: 'post'
   }
 };
 

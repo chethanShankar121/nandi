@@ -1,9 +1,10 @@
+import { ExtraServices } from './../../services/extra.service';
 import { ErrorHandlingService } from './../../services/error-handling.service';
 import { environment } from './../../../environments/environment';
 import { CommonResponseService } from './../../services/commonResponse.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { errorMessages, MyErrorStateMatcher } from '../../shared/commmonConfiguration/errorMatcher';
@@ -24,15 +25,24 @@ export class SignupComponent implements OnInit, OnDestroy {
     status: null,
     error: null
   };
+  phone;
+  emailId: any;
+  verification;
+  emailVerified = false;
+  phoneVerified = false;
   private addUserSubscription: Subscription;
+  private sendOtpSusbscription: Subscription;
+  userId: any;
 
   constructor(
     private userService: UserService,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private commonResponseService: CommonResponseService,
-    private errorHandling: ErrorHandlingService
+    private errorHandling: ErrorHandlingService,
+    private extras: ExtraServices
   ) {
-
+    this.routerParam();
   }
   form = new FormGroup({
     selectUser: new FormControl('', [Validators.required]),
@@ -66,6 +76,16 @@ export class SignupComponent implements OnInit, OnDestroy {
     repeatPassword: new FormControl('',
       [Validators.required]),
   });
+  routerParam() {
+    const queryParams = this.router.routerState.snapshot.root.queryParams;
+    this.verification = queryParams['verification'];
+    this.emailId = queryParams['email'];
+    this.phone = queryParams['phone'];
+    if (this.emailId && this.phone && this.verification && this.verification === 'true') {
+      this.apiStatus = 1;
+      this.showVerifiactionWidget = true;
+    }
+  }
   passwordValidator() {
     const condition = this.password.value !== this.repeatPassword.value;
     return condition;
@@ -103,9 +123,23 @@ export class SignupComponent implements OnInit, OnDestroy {
         this.addUserSubscription = this.commonResponseService.getData(url, method, payload)
           .subscribe(response => {
             if (response['responseStatus'] === 200) {
-              this.apiStatus = 1;
-              alert('user added');
-              this.showVerifiactionWidget = true;
+              if (!this.extras.isObjectEmpty(response.addtionalInfo.additonalDetails)) {
+                this.apiStatus = 1;
+                const params = {
+                  verification: true,
+                  email: response.addtionalInfo.additonalDetails.email,
+                  phone: response.addtionalInfo.additonalDetails.phone,
+                  emailVerified: response.addtionalInfo.additonalDetails.isEmailVerified,
+                  phoneVerified: response.addtionalInfo.additonalDetails.isPhoneNumberVerified
+                };
+                this.userId = response.addtionalInfo.additonalDetails.id;
+                this.router.navigate([], {
+                  relativeTo: this.activatedRoute,
+                  queryParams: params
+                });
+                // this.showVerifiactionWidget = true;
+                this.sendOTP(this.userId);
+              }
             }
           }, error => {
             this.apiStatus = -1;
@@ -119,7 +153,36 @@ export class SignupComponent implements OnInit, OnDestroy {
       this.errorHandling.handleJavascriptError(error);
     }
   }
-
+  sendOTP(userId) {
+    try {
+      if (userId) {
+        const url = environment.sendOtp.url;
+        const method = environment.sendOtp.method;
+        const id = userId;
+        const payload = {
+          operation: 'both',
+          userId: id
+        };
+        this.sendOtpSusbscription = this.commonResponseService.getData(url, method, payload)
+          .subscribe(response => {
+            if (response.responseStatus === 2000) {
+              this.showVerifiactionWidget = true;
+              alert('OTP sent to your Email and Phone Number');
+            } else {
+              this.showVerifiactionWidget = true;
+              alert('Details added Successfully, but, could not send OTP.\n Please resend OTP');
+            }
+          }, error => {
+            this.showVerifiactionWidget = true;
+            alert('Details added Successfully, but, could not send OTP.\n Please resend OTP');
+          });
+      }
+    } catch (error) {
+      this.showVerifiactionWidget = true;
+      alert('Details added Successfully, but, could not send OTP.\n Please resend OTP');
+      this.errorMessage = this.errorHandling.handleJavascriptError(error);
+    }
+  }
   private processFormData() {
     return {
       accessRole: parseInt(this.selectUser.value),
@@ -134,7 +197,10 @@ export class SignupComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     try {
       if (this.addUserSubscription) {
-        this.addUserSubscription.unsubscribe()
+        this.addUserSubscription.unsubscribe();
+      }
+      if (this.sendOtpSusbscription) {
+        this.sendOtpSusbscription.unsubscribe();
       }
     } catch (error) {
       this.errorHandling.handleJavascriptError(error);
