@@ -47,6 +47,17 @@ public class SignUpService {
 		this.userJpaRepository.save(user);
 		return this.responses.addedUserSuccessFulyy(userDetails);
 	}
+	
+	public ResponseModel updateUser(User user) {
+		Optional<User> requestedUser = this.userJpaRepository.findById(user.getId());
+		if (!requestedUser.isPresent()) {			
+			return this.responses.userNotFound();
+		}
+		this.userJpaRepository.save(user);
+		HashMap<String, Object> userDetails = new HashMap<String, Object>();
+		userDetails.put("additonalDetails", user);
+		return this.responses.updatedUserSuccessFulyy(userDetails);
+	}
 
 	public ResponseModel sendOtp(OtpRequest otpRequest) {
 		Optional<User> requestedUser = this.userJpaRepository.findById(otpRequest.getUserId());
