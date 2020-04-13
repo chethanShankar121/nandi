@@ -23,8 +23,10 @@ public interface UserJpaRepository extends JpaRepository<User, Long> {
 	@Query("delete from User u where u.phone = ?1 or u.email = ?2")
 	void deleteUnVerifiedUser(String phoneNumber, String email);
 	
-	Optional<User> findByEmail(String email);
+	@Query("Select u from User u where u.email = ?1 and email_verifed=true")
+	List<User> findByEmailVerified(String email);
 	
-	Optional<User> findByPhone(String phone);
+	@Query("Select u from User u where u.phone = ?1 and phone_number_verifed=true")
+	List<User> findByPhoneVerified(String phone);
 	
 }

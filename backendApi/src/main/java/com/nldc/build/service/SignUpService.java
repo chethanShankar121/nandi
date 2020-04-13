@@ -36,13 +36,18 @@ public class SignUpService {
 	Responses responses;	
 	
 	public ResponseModel addUser(User user) {
-		Optional<User> userWithEmail = this.userJpaRepository.findByEmail(user.getEmail());
-		Optional<User> userWithPhone = this.userJpaRepository.findByPhone(user.getPhone());
+		List<User> userWithEmail = this.userJpaRepository.findByEmailVerified(user.getEmail());
+		List<User> userWithPhone = this.userJpaRepository.findByPhoneVerified(user.getPhone());
 		HashMap<String, Object> userDetails = new HashMap<String, Object>();
-		userDetails.put("additonalDetails", user);
-		if (userWithEmail.isPresent() || userWithPhone.isPresent()) {			
+		if (userWithEmail.size() > 0) {
+			userDetails.put("additonalDetails", userWithEmail.get(0));
 			return this.responses.userAlreadyExsits(userDetails);
 		}
+		if (userWithPhone.size() > 0) {
+			userDetails.put("additonalDetails", userWithPhone.get(0));
+			return this.responses.userAlreadyExsits(userDetails);
+		}
+		userDetails.put("additonalDetails", user);
 		this.userJpaRepository.deleteUnVerifiedUser(user.getPhone(), user.getEmail());
 		this.userJpaRepository.save(user);
 		return this.responses.addedUserSuccessFulyy(userDetails);
