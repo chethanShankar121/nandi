@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class CreatePropertyComponent implements OnInit {
 
   propertyForSelected;
+  selectedPropertyType;
+  selectedSubPropertyType;
   scrollMenuItems = [
     {
       name: 'Property Details',
@@ -44,7 +46,68 @@ export class CreatePropertyComponent implements OnInit {
       key: 'lease',
     }
   ];
-
+  propertyTypeOptions = [
+    {
+      name: 'Residential',
+      key: 'residential'
+    },
+    {
+      name: 'Commericial',
+      key: 'commercial'
+    },
+    {
+      name: 'Others',
+      key: 'others'
+    }
+  ];
+  propertySubType = {
+    'residential': [
+      {
+        'name': 'Flat',
+        'key': 'flat'
+      },
+      {
+        'name': 'Apartment',
+        'key': 'apartment'
+      },
+      {
+        'name': 'House/Villa',
+        'key': 'villa'
+      },
+      {
+        'name': 'Plot/Land',
+        'key': 'plot'
+      },
+    ],
+    'commercial': [
+      {
+        'name': 'Office Space',
+        'key': 'officeSpace'
+      },
+      {
+        'name': 'Shop/Showroom',
+        'key': 'shop'
+      },
+      {
+        'name': 'Commercial Land',
+        'key': 'commercialLand'
+      },
+    ],
+    'others': [
+      {
+        'name': 'Agricultural Land',
+        'key': 'agriculturalLand'
+      },
+      {
+        'name': 'Farm House',
+        'key': 'farmHouse'
+      },
+      {
+        'name': 'Layouts',
+        'key': 'layouts'
+      },
+    ]
+  };
   constructor() { }
 
   ngOnInit() { }
@@ -57,5 +120,15 @@ export class CreatePropertyComponent implements OnInit {
   }
   typeSelection(type) {
     console.log(type);
+  }
+  propertyTypeSelected(event) {
+    if (event) {
+      this.selectedPropertyType = event.key;
+    }
+  }
+  propertySubTypeSelected(event) {
+    if (event) {
+      this.selectedSubPropertyType = event.key;
+    }
   }
 }

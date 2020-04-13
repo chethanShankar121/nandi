@@ -1,38 +1,117 @@
-<div class="create-property-wrapper">
+<div class="create-property-wrapper flex flex-col">
     <div class="scroll-menu">
         <div *ngFor="let item of scrollMenuItems" class="scroll-menu-items flex center-align" (click)="scrollToView(item.id, $event)">
             <div><img class="scroll-button-icon" src="../../assets/icons/{{item.id}}.svg"></div>
             <div>{{item.name}}</div>
         </div>
     </div>
-    <div class=" flex flex-col outer-container">
-        <div class="section-container" id="property-details">
-            <h2>Property Details</h2>
-            <div class="purpose-container">
-                <div>
-                    <!-- <mat-form-field>
-                        <mat-label>Property For</mat-label>
-                        <mat-select [(ngModel)]="selectedValue" name="opt">
-                          <mat-option *ngFor="let opt of purposeOptions" [value]="opt.value">
-                            {{opt.viewValue}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field> -->
-                    <app-drop-down [dropdownLabel]="'Property For'" [dropdownList]="purposeOptions"></app-drop-down>
+    <div class=" outer-container">
+        <div class="flex flex-col form-content-wrapper">
+            <div class="section-container property-details" id="property-details">
+                <app-widget-headers [headerText]="'Property Details'"></app-widget-headers>
+                <div class="flex flex-wrap property-detail-wrapper">
+                    <div class="purpose-container dropdown-container">
+                        <app-drop-down [dropdownLabel]="'Property For'" [dropdownList]="purposeOptions" (itemSelected)="propertyForSelected($event)">
+                        </app-drop-down>
+                    </div>
+                    <div class="type-container dropdown-container">
+                        <app-drop-down [dropdownLabel]="'Property Type'" [dropdownList]="propertyTypeOptions" (itemSelected)="propertyTypeSelected($event)">
+                        </app-drop-down>
+                    </div>
+                    <div class="type-container dropdown-container">
+                        <app-drop-down [dropdownLabel]="'Property Sub Type'" [dropdownList]="propertySubType[selectedPropertyType]"
+                                       (itemSelected)="propertySubTypeSelected($event)" [disabled]="selectedPropertyType === undefined"></app-drop-down>
+                    </div>
+                    <div class="dropdown-container" *ngIf="selectedSubPropertyType === 'flat' || selectedSubPropertyType === 'villa'">
+                        <label for="">Select Number of Rooms</label>
+                        <div class="bhk-wrapper flex flex-align-center">
+                            <input type="checkbox" name="bhk"><span>1BHK</span>
+                            <input type="checkbox" name="bhk"><span>2BHK</span>
+                            <input type="checkbox" name="bhk"><span>3BHK</span>
+                            <input type="checkbox" name="bhk"><span>>3BHK</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="type-container">
-                <div>Property Type:</div>
-                <div class="type-widget">
-                    <div class="type-menu flex">
-                        <app-property-type-select></app-property-type-select>
+            <div class="section-container" id="property-location">
+                <app-widget-headers [headerText]="'Property Location'"></app-widget-headers>
+                <div class="flex flex-wrap">
+                    <div class="input-field-wrapper">
+                        <div class="input-field-container flex flex-col">
+                            <label for="">Pincode</label>
+                            <input type="text" class="input-field">
+                        </div>
+                        <div class="input-field-container flex flex-col">
+                            <label for="">Street/Locality</label>
+                            <input type="text" class="input-field">
+                        </div>
+                        <div class="input-field-container flex flex-col">
+                            <label for="">Area</label>
+                            <input type="text" class="input-field">
+                        </div>
+                        <div class="input-field-container flex flex-col">
+                            <label for="">City</label>
+                            <input type="text" class="input-field">
+                        </div>
+                    </div>
+                    <div class="map-content-wrapper">
+                        <div class="map-container">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-container property-features" id="property-features">
+                <app-widget-headers [headerText]="'Property Features'"></app-widget-headers>
+                <div class="flex flex-col">
+                    <div class="input-field-container flex flex-wrap">
+                        <div class="input-container ">
+                            <div class="flex flex-align-center flex-between flex-align-center input-proxy ">
+                                <input class="input" type="text" placeholder="Built up area">
+                                <span>sq. ft</span>
+                            </div>
+                        </div>
+                        <div class="input-container ">
+                            <div class="flex flex-align-center flex-between flex-align-center input-proxy">
+                                <input class="input" type="text" placeholder="Built up area">
+                                <span>sq. ft</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-field-container flex flex-wrap">
+                        <div class="input-container ">
+                            <div class="flex flex-align-center flex-between flex-align-center input-proxy">
+                                <input class="input" type="text" placeholder="Floor Number">
+                                <span>(For Apartments/Villas)</span>
+                            </div>
+                        </div>
+                        <div class="input-container ">
+                            <div class="flex flex-align-center flex-between flex-align-center input-proxy">
+                                <input class="input" type="text" placeholder="Total Floors">
+                                <span>(For Apartments/Villas)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-field-container flex flex-wrap">
+                        <div class="input-container ">
+                            <div class="flex flex-align-center flex-between flex-align-center input-proxy">
+                                <input class="input" type="text" placeholder="Total Floors">
+                                <!-- <span>(For Apartments/Villas)</span> -->
+                            </div>
+                        </div>
+                        <div class="input-container ">
+                            <div class="flex flex-align-center flex-between flex-align-center input-proxy">
+                                <input class="input" type="text" placeholder="Available From">
+                                <span>Years</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="section-container" id="property-location"></div>
+        <!-- <div class="section-container" id="property-location"></div>
         <div class="section-container" id="property-features"></div>
         <div class="section-container" id="property-description"></div>
-        <div class="section-container" id="property-photos"></div>
+        <div class="section-container" id="property-photos"></div> -->
     </div>
 </div>

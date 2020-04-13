@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-drop-down',
@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class DropDownComponent implements OnInit {
   @Input() dropdownLabel;
   @Input() dropdownList;
+  @Input() disabled = false;
+  @Output() itemSelected = new EventEmitter();
   showDropDown = false;
   selectedItem = { name: null, key: null };
   constructor() { }
@@ -22,5 +24,6 @@ export class DropDownComponent implements OnInit {
   selectItem(selected) {
     this.selectedItem = selected;
     this.toggleDropdown();
+    this.itemSelected.emit(this.selectedItem);
   }
 }

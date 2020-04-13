@@ -7,23 +7,31 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    overflow: auto;
-    overflow: overlay;
+    align-items: center;
 }
 .signup-content-wrapper{
     background: #fff;
     box-shadow: 0 0 6px 0px #bcbcbc;
     border-radius: 1;
-    width: 60%;
-    padding: 4em;
+    padding: 0em 4em 4em 4em;
     border-radius: 12px;
-    margin: 10vh 0;
-    height: fit-content;
+    /* margin: 5vh 0; */
+    height: 95%;
+    width: 35%;
+    max-width: 800px;
+    max-height: 700px;
+}
+.form-wrapper{
+    height: 100%;
+    overflow: hidden;
 }
 .form-container{
     width: 60%;
+    overflow: auto;
+    overflow: overlay;
 }
 .form-container ::ng-deep .mat-button-toggle-group{
+    flex-shrink: 0;
     border-radius: 30px;
 }
 .form-container ::ng-deep .mat-button-toggle-label-content{
@@ -32,6 +40,8 @@
 .image-container{
     width: 40%;
     padding: 2em;
+    height: 100%;
+
 }
 .image-container>img{
     max-width: 100%;
@@ -48,6 +58,9 @@
 .access-role-field{
     width: 100%;
     border: 0;
+}
+.access-role-field ::ng-deep *:focus{
+    outline: none;
 }
 .access-role-label{
     padding-right: 1em;
@@ -75,6 +88,10 @@
     color: #fff;
     margin-top: 3em;
 }
+.signup-btn:hover{
+    cursor: pointer;
+    background-color:#000 ;
+}
 .image-container>p{
     color: #ed2074;
 }
@@ -84,7 +101,13 @@
 .login-link:hover{
     cursor: pointer;
 }
-@media only screen and (max-width: 760px){
+.btn-disabled{
+    background-color: #bcbcbc;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+@media only screen and (max-width: 600px) {
     .form-wrapper{
         display: flex;
         flex-direction: column;
@@ -94,8 +117,7 @@
     }
     .signup-content-wrapper{
         width: 95%;
-        margin: 5vh 0;
-        padding: 3em 2em;
+        padding:0 2em 3em 2em;
     }
     .signup-page-wrapper{
         display: box;
@@ -104,10 +126,43 @@
         width: 100%;
         padding: 3em 1em;
     }
-
+    .verification-img-container{
+        display: none;
+    }
 }
-@media only screen and (min-width: 1500px){
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .form-wrapper{
+        display: flex;
+        flex-direction: column;
+    }
+    .form-container{
+        width: 60%;
+    }
     .signup-content-wrapper{
-        width: 45%;
+        width: 85%;
+        padding:0 4em 3em 4em;
     }
+    .signup-page-wrapper{
+        display: box;
     }
+    .image-container{
+        width: 40%;
+        padding: 3em 1em;
+    }
+    
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .signup-content-wrapper{
+        max-height: 700px;
+    }
+}

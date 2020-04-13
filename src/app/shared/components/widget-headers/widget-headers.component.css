@@ -1,0 +1,9 @@
+.header-container{
+    width: 100%;
+    padding: 2em 0;
+}
+.header-text{
+    font-family: poppins-medium;
+    font-size: 1.8em;
+    color: #353535;
+}

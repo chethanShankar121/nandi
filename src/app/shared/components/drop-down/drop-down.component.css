@@ -1,6 +1,6 @@
 .filter-dropdown-wrap {
     justify-content: space-between;
-    max-width: 20em;
+    width: 100%;
 }
 
 .filter-button {
@@ -9,7 +9,10 @@
     display: flex;
     align-items: center;
     display: relative;
-    border-bottom: solid black 1px;
+    border: solid #737373  1px;
+    border-radius: 5px;
+    background-color: #fff;
+    width: 100%;
 }
 
 .filter-button:hover {
@@ -19,6 +22,7 @@
 .dropdown-indicator {
     text-transform: capitalize;
     padding-bottom: 2px;
+    white-space: nowrap;
 }
 
 .dropdown-icon {
@@ -29,7 +33,7 @@
 }
 
 .filter-text {
-    padding: 0 5px 2px 3px;
+    padding: 0 12px 2px 3px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -47,6 +51,7 @@
     max-height: 15em;
     box-shadow: 0 0 1px 1px #c6c5c5;
     border-radius: 5px;
+    z-index: 1;
 }
 
 .dropdown-item {
@@ -67,4 +72,9 @@
 
 .error-message {
     padding: 1em;
+}
+.inactive{
+    pointer-events: none;
+    cursor: not-allowed;
+    filter: opacity(0.6);
 }
