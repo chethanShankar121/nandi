@@ -1,11 +1,11 @@
 <div class="filter-dropdown-wrap relative" tabindex="1" (blur)="showDropDown = false">
-    <div class="flex relative filter-button" (click)="toggleDropdown()">
+    <div class="flex relative filter-button" (click)="toggleDropdown()" [class.inactive]="disabled === true">
         <div class="dropdown-indicator">{{dropdownLabel}}:</div>
         <div class="filter-text">{{selectedItem?.name}}</div>
         <img class="dropdown-icon" src="assets/icons/drop-down-black.svg">
     </div>
     <div class="filter-dropdown absolute" *ngIf="showDropDown">
-        <ng-container *ngFor="let item of dropdownList">
+        <ng-container *ngFor="let item of dropdownList | orderBy: {property: 'key', direction: 1}">
             <div class="dropdown-item" (click)="selectItem(item)">
                 {{item.name}}
             </div>
