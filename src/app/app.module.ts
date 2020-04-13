@@ -1,23 +1,23 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { ExtraServices } from './services/extra.service';
+import { CommonResponseService } from './services/commonResponse.service';
+import { ErrorHandlingService } from './services/error-handling.service';
+import { LandingPageModule } from './landing-page/landing-page.module';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ContextualMenuComponent } from './common/contextual-menu/contextual-menu.component';
+import { HeaderComponent } from './common/header/header.component';
 import { HomePageComponent } from './landing-page/home-page/home-page.component';
 import { LandingPageHeaderComponent } from './landing-page/landing-page-header/landing-page-header.component';
 import { MaterialModule } from './material-module';
-import {MatExpansionModule} from '@angular/material/expansion';
-import { HeaderComponent } from './common/header/header.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminModule } from './admin/admin.module';
-import { SharedModule } from './shared/shared.module';
-import { ContextualMenuComponent } from './common/contextual-menu/contextual-menu.component';
 import { OverlayComponent } from './secondary-components/overlay/overlay.component';
-import { SignupComponent } from './landing-page/signup/signup.component';
-import { LoginComponent } from './landing-page/login/login.component';
-import { HttpClientModule } from '@angular/common/http';
-
+// import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,8 +26,6 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     ContextualMenuComponent,
     OverlayComponent,
-    SignupComponent,
-    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -38,14 +36,14 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     AdminModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    LandingPageModule
   ],
   exports: [
     MatExpansionModule,
     MaterialModule,
-    SharedModule
   ],
-  providers: [],
+  providers: [ErrorHandlingService, CommonResponseService, ExtraServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

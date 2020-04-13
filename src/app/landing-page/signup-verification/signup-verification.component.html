@@ -1,0 +1,33 @@
+<div class="signup-verification-wrapper full-height full-width">
+    <app-widget-headers [headerText]="'Signup Verification'"></app-widget-headers>
+    <div class="verification-content-wrapper flex flex-col full-height full-width" [formGroup]="form">
+        <div class="input-field-container" *ngIf="emailVerified === 'false'">
+            <div class="flex full-width input-flex-wrapper">
+                <div class="flex flex-col input-container">
+                    <input matInput type="text" class="input-field email-field" name="email" value="{{emailId}}" formControlName="email" autocomplete="off">
+                    <div class="button">Save and send OTP</div>
+                </div>
+                <div class="flex flex-col input-container">
+                    <input type="text" class="input-field otp-field" placeholder="Email OTP" formControlName="emailOtp" autocomplete="off">
+                    <div class="button">Verify Email</div>
+                </div>
+            </div>
+        </div>
+        <div class="input-field-container" *ngIf="phoneVerified === 'false'">
+            <div class="flex full-width input-flex-wrapper">
+                <div class="flex flex-col input-container">
+                    <input type="text" class="input-field phone-field " value="{{phone}}" formControlName="phoneNum" autocomplete="off">
+                    <div class="button" >Save and send OTP</div>
+                </div>
+                <div class="flex flex-col input-container">
+                    <input type="text" class="input-field otp-field" placeholder="Phone OTP" formControlName="phoneOtp" autocomplete="off">
+                    <div class="button">Verify Phone</div>
+                </div>
+            </div>
+        </div>
+        <div class="verification-img-container flex flex-center">
+            <img src="assets/background-images/signup-image.jpg" alt="">
+            <!-- <p>Already a member ?</p> <span class="login-link" [routerLink]="['/home/login']">Login</span> -->
+        </div>
+    </div>
+</div>

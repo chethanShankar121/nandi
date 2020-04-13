@@ -1,0 +1,81 @@
+.signup-verification-wrapper{
+    overflow: hidden;
+}
+.verification-content-wrapper {
+    overflow: auto;
+    overflow: overlay;
+}
+.input-field-container{
+    padding-bottom: 2em;
+    padding-top: 0.1em;
+}
+.input-field-container:last-child{
+    padding-bottom: 0;
+}
+.input-field{
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    border: solid #bcbcbc 1px;
+}
+.input-container{
+    width: 50%;
+    flex-shrink: 0;
+    align-items: flex-start;
+}
+.input-container .input-field{
+    width: 80%;
+}
+.button{
+    color: #fff;
+    background-color: #353535;
+    border-radius: 25px;
+    margin-top: 1em;
+    font-size: 0.85em;
+    padding: 0.5em 1.5em;
+}
+.button:hover{
+    cursor: pointer;
+    background-color: #000;
+}
+.otp-field{
+    letter-spacing: 2em;
+}
+.otp-field::placeholder{
+    letter-spacing: 1px;
+}
+.disabled{
+    pointer-events: none;
+    background-color: #bcbcbc;
+}
+@media only screen and (max-width: 600px) {
+    .input-flex-wrapper{
+        flex-direction: column;
+    }
+    .input-container{
+        width: 100%;
+        padding-bottom: 1em;
+    }
+    .verification-img-container{
+        display: none;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .signup-content-wrapper{
+        max-height: 700px;
+    }
+}

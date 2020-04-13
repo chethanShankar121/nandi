@@ -9,7 +9,9 @@ export class patternValidators {
     }
     static shouldBeAlphabet(control: AbstractControl): ValidationErrors | null {
         if ((control.value as string).length > 0) {
-            if ((control.value as string).match('[a-zA-Z]')) {
+            const regex = /^[a-zA-Z]*$/;
+            const value = control.value as string;
+            if (regex.test(value)) {
                 return null;
             } else {
                 return { shouldBeAlphabet: true };
@@ -18,7 +20,7 @@ export class patternValidators {
     }
     static shouldBeNumbers(control: AbstractControl): ValidationErrors | null {
         if ((control.value as string).length > 0) {
-            if ((control.value as string).match('[0-9]')) {
+            if ((control.value as string).match(/^[0-9]*$/)) {
                 return null;
             } else {
                 return { shouldBeNumbers: true };

@@ -3,7 +3,21 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: true,
+  base: '{{baseUrl}}',
+  envName: 'dev',
+  addUser: {
+    url: '/nldc/addUser',
+    method: 'post'
+  },
+  loginUser: {
+    url: '/nldc/login',
+    method: 'post'
+  },
+  sendOtp: {
+    url: '/addUser/sendOtp',
+    method: 'post'
+  }
 };
 
 /*

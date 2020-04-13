@@ -1,6 +1,7 @@
 <div class="signup-page-wrapper">
-    <div class="signup-content-wrapper">
-        <div class="flex flex-wrap form-wrapper">
+    <div class="signup-content-wrapper relative flex flex-col">
+        <app-widget-headers [headerText]="'Signup'" *ngIf="!showVerifiactionWidget && apiStatus !== -1 && apiStatus !== 0"></app-widget-headers>
+        <div class="flex flex-wrap form-wrapper" *ngIf="!showVerifiactionWidget && apiStatus !== -1 && apiStatus !== 0">
             <div class="form-container" [formGroup]="form">
                 <div class="input-field-container access-role-field flex flex-col ">
                     <div class="flex flex-align-center">
@@ -71,8 +72,8 @@
                 <div class="input-field-container flex flex-col">
                     <div class="flex input-container flex-align-center">
                         <mat-icon class="input-icon">lock</mat-icon>
-                        <input matInput class="input-field" formControlName="password" type="password" name="password" placeholder="Password" 
-                        autocomplete="off">
+                        <input matInput class="input-field" formControlName="password" type="password" name="password" placeholder="Password"
+                               autocomplete="off">
                     </div>
                     <mat-error *ngIf="(password.touched || password.dirty) && password.invalid">
                         <div *ngIf="password.errors.required">* Password is mandatory</div>
@@ -84,19 +85,25 @@
                 <div class="input-field-container flex flex-col">
                     <div class="flex input-container flex-align-center">
                         <mat-icon class="input-icon">repeat</mat-icon>
-                        <input matInput class="input-field" formControlName="repeatPassword" type="password" name="rePassword" placeholder="Password" 
-                        autocomplete="off" [errorStateMatcher]="matcher">
+                        <input matInput class="input-field" formControlName="repeatPassword" type="password" name="rePassword" placeholder="Password"
+                               autocomplete="off" [errorStateMatcher]="matcher">
                     </div>
                     <mat-error *ngIf="repeatPassword.touched || repeatPassword.dirty">
                         <div *ngIf="passwordValidator()">* Passwords do not match</div>
                     </mat-error>
                 </div>
-                <div class="signup-btn" (click)="signUpUser()">Signup</div>
+                <div class="signup-btn" (click)="signUpUser()" [ngClass]="form.invalid ? 'btn-disabled': ''">Signup</div>
             </div>
+
             <div class="image-container">
                 <img src="assets/background-images/signup-image.jpg" alt="">
                 <p>Already a member ?</p> <span class="login-link" [routerLink]="['/home/login']">Login</span>
             </div>
         </div>
+        <app-error-message [errorMessage]="errorMessage" *ngIf="apiStatus === -1"></app-error-message>
+        <div class="signup-verification-wrapper full-width full-height" *ngIf="showVerifiactionWidget && apiStatus === 1">
+            <app-signup-verification ></app-signup-verification>
+        </div>
+        <app-widget-loader *ngIf="apiStatus === 0"></app-widget-loader>
     </div>
 </div>

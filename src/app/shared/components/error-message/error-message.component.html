@@ -1,0 +1,5 @@
+<div class="error-wrapper full-width full-height flex flex-col flex-align-center flex-center" *ngIf="fetchedMessage">
+    <img class="error-icon" src="{{fetchedMessage.icon}}" alt="">
+    <p class="error-message-title" *ngIf="fetchedMessage.title">{{fetchedMessage.title}}</p>
+    <p class="error-message-description">{{fetchedMessage.description}}</p>
+</div>
