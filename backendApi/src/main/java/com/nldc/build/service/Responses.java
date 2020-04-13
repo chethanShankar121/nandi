@@ -21,6 +21,10 @@ public class Responses {
 		return new ResponseModel(200, "added User successfully", userDetails);
 	}
 	
+	public ResponseModel updatedUserSuccessFulyy(HashMap<String, Object> userDetails) {
+		return new ResponseModel(200, "updated User successfully", userDetails);
+	}
+	
 	public ResponseModel userNotFound() {
 		return new ResponseModel(200, "User not found", null);
 	}
